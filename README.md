@@ -16,6 +16,8 @@ Client → API (Gin, /api/v1) → PostgreSQL
 
 Grading logic lives in `internal/evaluation` as **pure functions** (no database, clock, or randomness). The server computes final scores and mastery status; AI only provides signals.
 
+**New here?** Read [docs/flows.md](docs/flows.md) for end-to-end journeys — learning a topic, taking an assessment, doing an interview, publishing content, and validating an AI prompt change.
+
 ## Getting Started
 
 Requires Go 1.26+ and PostgreSQL 13+.
