@@ -7,7 +7,8 @@ package migrations
 
 import "embed"
 
-// FS berisi seluruh berkas .sql di direktori ini.
+// FS berisi seluruh berkas migrasi .sql di direktori ini. Snapshot skema
+// (schema_snapshot.sql) sengaja tidak disertakan karena bukan migrasi.
 //
-//go:embed *.sql
+//go:embed [0-9][0-9][0-9][0-9]_*.sql
 var FS embed.FS

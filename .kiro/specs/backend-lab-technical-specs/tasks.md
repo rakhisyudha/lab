@@ -64,7 +64,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Paket `platform/settings`, `Update` dan `Snapshot` pada penyimpanan in-memory dengan model referensi per kunci.
     - **Validates: Requirements 24.3, 24.4, 24.6**
 
-- [ ] 2. Migrasi database (seluruh migrasi P0)
+- [x] 2. Migrasi database (seluruh migrasi P0)
   - [x] 2.1 Siapkan `cmd/migrate` dan tulis migrasi `0001_helpers` serta `0002_locales_auth`
     - `cmd/migrate up|down` dengan `golang-migrate`, opsi `--include-p1` (dipakai pada tugas opsional 26).
     - `0001`: `set_updated_at`, `attach_updated_at_trigger`, `enforce_reviewer_admin`, `attach_translation_triggers`.
@@ -96,7 +96,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - `golden_cases`, `golden_runs` (kolom `run_mode` `recorded` atau `live`, `trigger_source`, `baseline_run_id` yang hanya merujuk run `live` berstatus `passed`, `status` termasuk `insufficient_coverage` dan `errored`, `error_reasons`), `golden_run_results`, dan `golden_recordings` (unique `(prompt_contract_id, model_name, golden_case_id)`, `responses` array tidak kosong, `case_sha256`, `source_run_id`).
     - _Requirements: 6.7, 11.15, 12.1, 12.2, 12.3, 12.5, 17.1, 17.3, 17.14, 17.15_
 
-  - [~] 2.6 Tulis migrasi `0009_seed_reference` dan skrip verifikasi migrasi CI
+  - [x] 2.6 Tulis migrasi `0009_seed_reference` dan skrip verifikasi migrasi CI
     - Seed: `supported_locales` (`id` default, `en`), `ai_task_types`, `interview_profiles` (Practice 5 sampai 10, 2 follow-up, total cap 10, depth 2. Recruitment 6 sampai 10, 3 follow-up, total cap 15, depth 3, bobot 30/25/20/15/10), `ai_provider_settings` contoh nonaktif.
     - Seed `app_settings` dengan `is_initial_value = true`, `value_schema`, dan `description` untuk seluruh parameter Requirement 24.2: penalti Misconception `minor` dan batasnya, penalti dan batas skor Critical_Misconception, nilai kredit `partial`, batas clamp, ambang metrik Golden_Set (`golden.threshold.*`, `golden.regression_tolerance`), `golden.min_cases_per_category`, `golden.live_schedule_enabled` dan `golden.live_schedule_cron`, kuota AI `ai.quota.{scope}.{period}.{metric}` (delapan kombinasi: tiga ber-Initial_Value, lima `null` tanpa batas, DA-16), `ai.per_user_queue_limit`, TTL Access_Token dan Refresh_Token, `ai.max_validation_retries`, `ai.max_evaluation_retries`, `ai.evaluation_retry_window_hours`, `interview.min_topics_per_session`, `interview.max_topics_per_session`, serta parameter Mastery v1.
     - Seed memakai `ON CONFLICT (key) DO NOTHING` agar seed ulang tidak menimpa nilai yang sudah diubah Admin dan tidak mengembalikan `is_initial_value` ke true. Tidak ada seed `ai_quota_settings`.

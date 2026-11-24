@@ -239,6 +239,83 @@ func TestMigrateUpDownIntegration(t *testing.T) {
 	assertTablesExist(t, conn, true)
 }
 
+// TestSeedReferenceIntegration memeriksa data referensi dari 0009_seed_reference.
+// Dilewati bila TEST_DATABASE_URL tidak diset.
+func TestSeedReferenceIntegration(t *testing.T) {
+	testURL := os.Getenv("TEST_DATABASE_URL")
+	if testURL == "" {
+		t.Skip("TEST_DATABASE_URL tidak diset, test integrasi seed dilewati")
+	}
+	lookup := func(key string) (string, bool) {
+		if key == envDatabaseURL {
+			return testURL, true
+		}
+		return "", false
+	}
+	ctx := context.Background()
+	var out bytes.Buffer
+	if err := run([]string{"down", "--all"}, &out, &out, lookup); err != nil {
+		t.Fatalf("down awal: %v (output: %s)", err, out.String())
+	}
+	out.Reset()
+	if err := run([]string{"up"}, &out, &out, lookup); err != nil {
+		t.Fatalf("up: %v (output: %s)", err, out.String())
+	}
+	conn, err := pgx.Connect(ctx, testURL)
+	if err != nil {
+		t.Fatalf("koneksi test: %v", err)
+	}
+	defer conn.Close(ctx)
+
+	assertCount(t, ctx, conn, `SELECT count(*) FROM supported_locales`, 2)
+	var defaultLocale string
+	if err := conn.QueryRow(ctx, `SELECT code FROM supported_locales WHERE is_default`).Scan(&defaultLocale); err != nil {
+		t.Fatalf("membaca default locale: %v", err)
+	}
+	if defaultLocale != "id" {
+		t.Fatalf("default locale = %q, want id", defaultLocale)
+	}
+	assertCount(t, ctx, conn, `SELECT count(*) FROM ai_task_types`, 3)
+	assertCount(t, ctx, conn, `SELECT count(*) FROM interview_profiles`, 2)
+	assertCount(t, ctx, conn, `SELECT count(*) FROM interview_profiles
+		WHERE w_technical_accuracy + w_conceptual_understanding + w_reasoning
+		    + w_practical_application + w_communication = 100`, 2)
+	assertCount(t, ctx, conn, `SELECT count(*) FROM ai_provider_settings WHERE is_enabled = false`, 1)
+
+	// Requirement 24.2: seluruh kunci App_Settings tersemai sebagai Initial_Value.
+	assertCount(t, ctx, conn, `SELECT count(*) FROM app_settings WHERE NOT is_initial_value`, 0)
+	assertCount(t, ctx, conn, `SELECT count(*) FROM app_settings WHERE key LIKE 'ai.quota.%'`, 8)
+	for _, key := range []string{
+		"mastery.mastered_threshold", "scoring.clamp_min", "scoring.clamp_max",
+		"ai.max_validation_retries", "ai.max_evaluation_retries", "ai.per_user_queue_limit",
+		"auth.access_token_ttl_seconds", "auth.refresh_token_ttl_seconds",
+		"interview.min_topics_per_session", "interview.max_topics_per_session",
+		"golden.min_cases_per_category", "golden.regression_tolerance",
+	} {
+		assertCount(t, ctx, conn, `SELECT count(*) FROM app_settings WHERE key = $1`, 1, key)
+	}
+
+	// Kuota AI tidak memakai tabel tersendiri (Requirement 16.2).
+	var quotaTableExists bool
+	if err := conn.QueryRow(ctx, `SELECT to_regclass('public.ai_quota_settings') IS NOT NULL`).Scan(&quotaTableExists); err != nil {
+		t.Fatalf("cek tabel ai_quota_settings: %v", err)
+	}
+	if quotaTableExists {
+		t.Fatal("tabel ai_quota_settings tidak boleh ada")
+	}
+}
+
+func assertCount(t *testing.T, ctx context.Context, conn *pgx.Conn, query string, want int, args ...any) {
+	t.Helper()
+	var got int
+	if err := conn.QueryRow(ctx, query, args...).Scan(&got); err != nil {
+		t.Fatalf("hitung %q: %v", query, err)
+	}
+	if got != want {
+		t.Fatalf("hitung %q = %d, want %d", query, got, want)
+	}
+}
+
 func assertTablesExist(t *testing.T, conn *pgx.Conn, want bool) {
 	t.Helper()
 	for _, table := range []string{"supported_locales", "users", "invitations", "refresh_tokens"} {
