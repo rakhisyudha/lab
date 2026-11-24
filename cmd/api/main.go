@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -11,12 +12,22 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
+	"github.com/google/uuid"
+
+	"github.com/rakhisyudha/lab/internal/admin"
+	"github.com/rakhisyudha/lab/internal/ai/evaluator"
+	"github.com/rakhisyudha/lab/internal/ai/gateway"
+	"github.com/rakhisyudha/lab/internal/ai/provider"
+	"github.com/rakhisyudha/lab/internal/ai/schema"
 	"github.com/rakhisyudha/lab/internal/ai/taskqueue"
 	"github.com/rakhisyudha/lab/internal/auth"
 	"github.com/rakhisyudha/lab/internal/content"
+	"github.com/rakhisyudha/lab/internal/evaluation"
+	"github.com/rakhisyudha/lab/internal/golden"
 	"github.com/rakhisyudha/lab/internal/platform/clock"
 	"github.com/rakhisyudha/lab/internal/platform/config"
 	"github.com/rakhisyudha/lab/internal/platform/db"
@@ -91,6 +102,56 @@ func run() error {
 	progressHandler.RegisterRoutes(api.Group("/me", middleware.Authenticate()))
 	adminGroup := api.Group("/admin", middleware.Authenticate(), auth.RequireRole("admin"))
 	taskHandler.RegisterRoutes(api, adminGroup, middleware.Authenticate())
+
+	goldenStore := golden.NewStore(pool)
+
+	// Provider aktif dibaca dari ai_provider_settings; kredensial dari environment.
+	var providers []provider.Provider
+	providerRows, err := pool.Query(ctx, `SELECT provider_name, model_name FROM ai_provider_settings
+		WHERE is_enabled ORDER BY fallback_order`)
+	if err != nil {
+		return err
+	}
+	for providerRows.Next() {
+		var name, model string
+		if err := providerRows.Scan(&name, &model); err != nil {
+			providerRows.Close()
+			return err
+		}
+		prefix := strings.ToUpper(name)
+		providers = append(providers, provider.NewHTTPProvider(name,
+			os.Getenv(prefix+"_BASE_URL"), model, os.Getenv(prefix+"_API_KEY")))
+	}
+	providerRows.Close()
+
+	contracts, err := evaluator.LoadContracts(ctx, pool)
+	if err != nil {
+		return err
+	}
+	gw := gateway.New(providers, limiter, settingsSvc, c)
+	evalSvc := evaluator.NewService(pool, gw, contracts, settingsSvc, c)
+	liveEvaluator := func(ctx context.Context, cs golden.Case) (schema.Output, evaluation.AnswerScore, error) {
+		owner := uuid.Nil
+		if err := pool.QueryRow(ctx, `SELECT owner_id FROM golden_cases WHERE id = $1`, cs.ID).Scan(&owner); err != nil {
+			return schema.Output{}, evaluation.AnswerScore{}, err
+		}
+		var topicID uuid.UUID
+		if err := pool.QueryRow(ctx, `SELECT topic_id FROM questions WHERE id = $1`, cs.QuestionID).Scan(&topicID); err != nil {
+			return schema.Output{}, evaluation.AnswerScore{}, err
+		}
+		payload, _ := json.Marshal(evaluator.Payload{
+			QuestionID: cs.QuestionID, UserID: owner, TopicID: topicID,
+			AnswerText: cs.SampleAnswer, Locale: cs.Locale,
+		})
+		res, err := evalSvc.Evaluate(ctx, taskqueue.Task{Payload: payload, MaxAttempts: 5})
+		if err != nil {
+			return schema.Output{}, evaluation.AnswerScore{}, err
+		}
+		return res.Gateway.Output, res.Score, nil
+	}
+	goldenRunner := golden.NewRunner(goldenStore, settingsSvc, c, liveEvaluator)
+	golden.NewHandler(goldenStore, goldenRunner).RegisterRoutes(adminGroup)
+	admin.NewHandler(pool, settingsSvc).RegisterRoutes(adminGroup)
 
 	addr := os.Getenv("PORT")
 	if addr == "" {

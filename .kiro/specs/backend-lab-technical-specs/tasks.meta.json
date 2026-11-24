@@ -598,6 +598,11 @@
                                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                  "timestamp":  1795465828501
+                                                                                             },
+                                                                                             {
+                                                                                                 "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                 "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                 "timestamp":  1795486500000
                                                                                              }
                                                                                          ],
                              "13.1 Implementasi `ValidateCase` dan endpoint CRUD Golden_Set":  [
@@ -605,6 +610,11 @@
                                                                                                        "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                        "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                        "timestamp":  1795465828553
+                                                                                                   },
+                                                                                                   {
+                                                                                                       "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                       "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                       "timestamp":  1795486500001
                                                                                                    }
                                                                                                ],
                              "13.3 Implementasi metrik, gate, regresi, baseline, dan Runner inti":  [
@@ -612,6 +622,11 @@
                                                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                             "timestamp":  1795465828616
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                            "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                            "timestamp":  1795486500002
                                                                                                         }
                                                                                                     ],
                              "13.5 Implementasi mode `recorded` dan `live`, perekaman response, dan endpoint run":  [
@@ -619,6 +634,11 @@
                                                                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                                             "timestamp":  1795465828713
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                            "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                            "timestamp":  1795486500003
                                                                                                                         }
                                                                                                                     ],
                              "13.7 Siapkan fixture Golden_Set v0":  [
@@ -626,6 +646,11 @@
                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                             "timestamp":  1795465828767
+                                                                        },
+                                                                        {
+                                                                            "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                            "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                            "timestamp":  1795486500004
                                                                         }
                                                                     ],
                              "14.1 Implementasi endpoint konfigurasi provider AI":  [
@@ -633,6 +658,11 @@
                                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                             "timestamp":  1795465828822
+                                                                                        },
+                                                                                        {
+                                                                                            "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                            "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                            "timestamp":  1795486500005
                                                                                         }
                                                                                     ],
                              "14.2 Implementasi endpoint Prompt_Contract dan gate aktivasi":  [
@@ -640,6 +670,11 @@
                                                                                                       "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                       "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                       "timestamp":  1795465828879
+                                                                                                  },
+                                                                                                  {
+                                                                                                      "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                      "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                      "timestamp":  1795486500006
                                                                                                   }
                                                                                               ],
                              "14.4 Implementasi endpoint App_Settings dan view kuota AI":  [
@@ -647,6 +682,11 @@
                                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                    "timestamp":  1795465828943
+                                                                                               },
+                                                                                               {
+                                                                                                   "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                   "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                   "timestamp":  1795486500007
                                                                                                }
                                                                                            ],
                              "15. Checkpoint Phase 2":  [
@@ -654,6 +694,11 @@
                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                 "timestamp":  1795465828997
+                                                            },
+                                                            {
+                                                                "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                "timestamp":  1795486500008
                                                             }
                                                         ],
                              "16.1 Implementasi pembuatan attempt dan pembacaan hasil":  [

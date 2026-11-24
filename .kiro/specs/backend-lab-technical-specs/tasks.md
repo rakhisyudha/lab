@@ -185,7 +185,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Validates: Requirements 5.1, 5.2, 5.3**
 
   - [x] 4.3 Implementasi workflow Translation sebagai fungsi murni dan service
-    - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`â†’`in_review`, `in_review`â†’`draft`, `in_review`â†’`published`, `published`â†’`archived`, `archived`â†’`draft`), `invalid_status_transition` dan `version_conflict` (409).
+    - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`Ã¢â€ â€™`in_review`, `in_review`Ã¢â€ â€™`draft`, `in_review`Ã¢â€ â€™`published`, `published`Ã¢â€ â€™`archived`, `archived`Ã¢â€ â€™`draft`), `invalid_status_transition` dan `version_conflict` (409).
     - Translation baru berstatus `draft` dengan `version` 1. Ubah teks menaikkan `version` lewat `UPDATE ... WHERE version = $2`. Edit pada `published` mengembalikan ke `draft` dan mengosongkan `published_at`. Transisi ke `published` mensyaratkan `reviewer_id` ber-role `admin` dan mengisi `reviewed_at`, `published_at`.
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 26.4_
 
@@ -278,7 +278,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
 
 - [ ] 10. Task service
   - [x] 10.1 Implementasi `NextTaskState` sebagai fungsi murni
-    - `internal/evaluation/tasklife.go`: transisi hanya `queued`â†’`processing` (`run_after <= now`), `processing`â†’`completed`, `processing`â†’`queued` (`requeue` dengan `count_attempt`), `processing`â†’`failed`, dan `lock_expired` (kembali ke `queued` bila `attempts < max_attempts`, selain itu `failed` dengan `ai_provider_unavailable`). `completed` dan `failed` terminal, transisi lain menghasilkan `invalid_task_transition`.
+    - `internal/evaluation/tasklife.go`: transisi hanya `queued`Ã¢â€ â€™`processing` (`run_after <= now`), `processing`Ã¢â€ â€™`completed`, `processing`Ã¢â€ â€™`queued` (`requeue` dengan `count_attempt`), `processing`Ã¢â€ â€™`failed`, dan `lock_expired` (kembali ke `queued` bila `attempts < max_attempts`, selain itu `failed` dengan `ai_provider_unavailable`). `completed` dan `failed` terminal, transisi lain menghasilkan `invalid_task_transition`.
     - Invarian: `status = processing` jika dan hanya jika `locked_at` terisi, `completed` memiliki `result`, `failed` memiliki `error_code`, `0 <= attempts <= max_attempts`.
     - _Requirements: 16.5, 16.10, 16.13, 26.4_
 
@@ -370,13 +370,13 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Kategori:** Wajib (area 1: scoring free-text). Nama test `TestPropW12_<Judul>`.
     - **Validates: Requirements 20.8, 26.2**
 
-  - [~] 12.4 Implementasi service Evaluator `answer_evaluation`
+  - [x] 12.4 Implementasi service Evaluator `answer_evaluation`
     - Susun input kontrak (pertanyaan, Concept, jawaban sebagai data tidak tepercaya, Locale, Misconception aktif tanpa `severity`, kode `detected` milik Learner), panggil `Gateway.Run`, lalu `ScoreAnswer`. Belum menyimpan hasil (penyimpanan ada pada tugas 17.1).
     - Instruksi prompt membatasi pilihan `code` hanya dari input dan melarang output `severity` atau skor final.
     - _Requirements: 14.1, 14.2, 14.7, 14.9_
 
 - [ ] 13. Golden set
-  - [~] 13.1 Implementasi `ValidateCase` dan endpoint CRUD Golden_Set
+  - [x] 13.1 Implementasi `ValidateCase` dan endpoint CRUD Golden_Set
     - `internal/golden`: validasi `expected_score_min <= expected_score_max`, kode Misconception dalam katalog Topic, kode Concept dalam Concept pertanyaan, Concept tidak ada pada found dan missed sekaligus, `locale` memiliki Published_Translation pertanyaan.
     - `GET`, `POST`, `PATCH`, `DELETE /admin/golden-cases` (offset pagination, hanya `admin`).
     - _Requirements: 10.8, 17.1, 17.4, 17.11_
@@ -386,7 +386,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Kategori:** Opsional (di luar delapan area inti). Nama test `TestPropO23_<Judul>`.
     - **Validates: Requirements 17.4**
 
-  - [~] 13.3 Implementasi metrik, gate, regresi, baseline, dan Runner inti
+  - [x] 13.3 Implementasi metrik, gate, regresi, baseline, dan Runner inti
     - `ComputeGoldenMetrics` (`score_in_range_rate`, `concept_f1`, `critical_recall`, `false_critical_rate`, `injection_resilience_rate`, `catalog_violation_count`, `schema_violation_count`), `EvaluateGate` (`insufficient_coverage`, ambang lulus dari `golden.threshold.*`, toleransi regresi `golden.regression_tolerance` terhadap baseline), dan `SelectBaseline` (hanya run `live` berstatus `passed` milik versi aktif, tidak pernah run `recorded`). Seluruh ambang adalah Initial_Value pada App_Settings.
     - Runner inti memakai pipeline produksi (`Gateway.Run` lalu `ScoreAnswer`) melalui antarmuka sumber response per kasus, yang diimplementasikan oleh mode `live` dan `recorded` pada tugas 13.5.
     - Kategori: `different_wording`, `partially_correct`, `critical_misconception`, `off_topic_or_empty`, `adversarial_injection`. `golden.min_cases_per_category` default 5.
@@ -397,7 +397,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Kategori:** Opsional (di luar delapan area inti). Nama test `TestPropO24_<Judul>`.
     - **Validates: Requirements 17.6, 17.7, 17.8, 17.9**
 
-  - [~] 13.5 Implementasi mode `recorded` dan `live`, perekaman response, dan endpoint run
+  - [x] 13.5 Implementasi mode `recorded` dan `live`, perekaman response, dan endpoint run
     - `POST /admin/golden-runs` dengan `run_mode` wajib (`recorded` atau `live`), `GET /admin/golden-runs` dan `/{id}`. Menyimpan `run_mode`, `prompt_contract_id`, `model_name`, `trigger_source`, hasil per kasus, dan metrik agregat.
     - `recorded` (dipakai CI, `trigger_source = ci`): menilai response terekam dari `golden_recordings` untuk pasangan (`prompt_contract_id`, `model_name`) lewat `provider/replay`, tanpa memanggil AI provider dan tanpa AITask. Rekaman hilang atau `case_sha256` basi menghasilkan run `errored` (`recording_missing:<case_id>`, `recording_stale:<case_id>`), bukan `passed`.
     - `live` (manual oleh Admin atau job terjadwal di worker lewat `golden.live_schedule_enabled` dan `golden.live_schedule_cron`, `trigger_source = schedule`, di luar pipeline CI): memanggil model nyata lewat `Gateway.Run` sebagai AITask priority 3 yang tunduk pada kuota dan rate limit. Setelah tiap kasus selesai, upsert `golden_recordings` (A-26, DA-14) berisi urutan seluruh response (termasuk yang gagal validasi) dan `case_sha256`.
@@ -410,17 +410,17 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Paket `golden`, `SelectBaseline` dan fungsi gate aktivasi (alasan `run_not_live`). Run `recorded` dengan rekaman hilang atau basi menghasilkan `errored`.
     - **Validates: Requirements 15.10, 17.12, 17.13, 17.14, 17.15**
 
-  - [~] 13.7 Siapkan fixture Golden_Set v0
+  - [x] 13.7 Siapkan fixture Golden_Set v0
     - `test/golden`: sedikitnya `min_cases_per_category` kasus per kategori untuk Topic contoh, termasuk lima kasus `adversarial_injection` (perintah abaikan instruksi, tiruan delimiter, tiruan JSON output). Label memakai `code` katalog.
     - Sediakan rekaman fixture yang dijalankan sebagai run `recorded` melalui provider replay pada CI (tanpa AI provider).
     - _Requirements: 17.2, 17.5, 17.12, 23.6_
 
 - [ ] 14. Admin konfigurasi AI dan aktivasi Prompt_Contract
-  - [~] 14.1 Implementasi endpoint konfigurasi provider AI
+  - [x] 14.1 Implementasi endpoint konfigurasi provider AI
     - `GET`, `PUT /admin/ai-provider-settings` (provider, RPM, TPM, urutan fallback). Perubahan berlaku tanpa deploy ulang. Kuota AI tidak memakai tabel atau endpoint terpisah dan dikelola lewat App_Settings pada tugas 14.4.
     - _Requirements: 10.9, 16.2_
 
-  - [~] 14.2 Implementasi endpoint Prompt_Contract dan gate aktivasi
+  - [x] 14.2 Implementasi endpoint Prompt_Contract dan gate aktivasi
     - `GET`, `POST /admin/prompt-contracts` (versi baru berstatus `draft`) dan `POST /admin/prompt-contracts/{id}/activate`.
     - Aktivasi `answer_evaluation` mensyaratkan run Golden_Set terbaru untuk versi calon yang `passed`, berasal dari `run_mode = live`, dan tidak regresi terhadap baseline `live` (error `golden_gate_failed`, alasan termasuk `run_not_live` untuk run `recorded`), atau `waiver_reason` tercatat. `interview_followup` dan `interview_evaluation` diaktifkan tanpa gate Golden_Set. Retire versi lama dan aktifkan versi baru dalam satu transaksi. Versi di luar `draft` immutable.
     - _Requirements: 10.9, 15.3, 15.10, 15.11, 17.15_
@@ -429,7 +429,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Setiap alasan `golden_gate_failed` (termasuk `run_not_live`) dan jalur `waiver_reason`. Run `recorded` mereproduksi metrik run `live` tanpa memanggil provider (provider palsu gagal bila dipanggil), dan rekaman basi menghasilkan `errored`.
     - _Requirements: 15.10, 15.11, 17.12, 17.14, 17.15_
 
-  - [~] 14.4 Implementasi endpoint App_Settings dan view kuota AI
+  - [x] 14.4 Implementasi endpoint App_Settings dan view kuota AI
     - `GET /admin/settings` (offset pagination, filter `prefix`), `GET`, `PUT /admin/settings/{key}`, dan `GET`, `PUT /admin/ai-quota-settings` sebagai view atas kunci `ai.quota.*` tanpa tabel sendiri (validasi, `is_initial_value`, dan `updated_by` sama dengan `/admin/settings`). Hanya role `admin`.
     - Setiap item memuat `key`, `value`, `description`, `is_initial_value`, `updated_by`, `updated_at`. `PUT` memakai `Settings.Update` (tugas 1.6): nilai gagal `value_schema` atau aturan lintas kunci menghasilkan 400 `validation_error`, kunci baru menghasilkan `not_found`, perubahan valid menetapkan `is_initial_value = false`.
     - _Requirements: 10.9, 10.15, 16.2, 24.3, 24.4, 24.6_
