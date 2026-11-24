@@ -90,7 +90,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - `interview_profiles`, `interview_sessions` (kolom lengkap termasuk `prompt_contract_versions`, `retention_until`, `deleted_at`), `interview_messages` (unique `(interview_session_id, sequence)`) dengan kolom evaluasi yang sama pada pesan `kind = answer` (`evaluation_status`, `evaluation_retry_count`, `evaluation_failed_at`, `evaluation_prompt_contract_id`) dan constraint `kind = 'answer'` jika dan hanya jika `evaluation_status` terisi.
     - _Requirements: 11.1, 11.2, 11.5, 20.1, 20.11, 20.12, 21.1, 25.1, 25.4_
 
-  - [~] 2.5 Tulis migrasi `0007_evaluation_progress` dan `0008_golden_set`
+  - [x] 2.5 Tulis migrasi `0007_evaluation_progress` dan `0008_golden_set`
     - `answer_evaluations`, `answer_evaluation_misconceptions`, `interview_evaluations`, `topic_attempts`, `mastery_records` (unique `(user_id, topic_id)`, `interview_ready` nullable), `user_misconceptions` (unique `(user_id, misconception_id)`).
     - Unique index sumber untuk idempotensi penulisan hasil (`answer_evaluations_aa_uk`, `answer_evaluations_im_uk`, `topic_attempts_*_uk`).
     - `golden_cases`, `golden_runs` (kolom `run_mode` `recorded` atau `live`, `trigger_source`, `baseline_run_id` yang hanya merujuk run `live` berstatus `passed`, `status` termasuk `insufficient_coverage` dan `errored`, `error_reasons`), `golden_run_results`, dan `golden_recordings` (unique `(prompt_contract_id, model_name, golden_case_id)`, `responses` array tidak kosong, `case_sha256`, `source_run_id`).
