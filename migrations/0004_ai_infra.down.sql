@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS rate_buckets;
+DROP TABLE IF EXISTS app_settings;
+DROP FUNCTION IF EXISTS app_settings_mark_changed();
+DROP TABLE IF EXISTS ai_injection_events;
+DROP TABLE IF EXISTS ai_usage_logs;
+DROP TABLE IF EXISTS ai_tasks;
+DROP TABLE IF EXISTS ai_provider_settings;
+DROP TABLE IF EXISTS prompt_contracts;
+DROP FUNCTION IF EXISTS prompt_contracts_immutable();
+DROP TABLE IF EXISTS ai_task_types;

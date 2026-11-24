@@ -212,7 +212,7 @@ func TestMigrateUpDownIntegration(t *testing.T) {
 		t.Fatalf("up: %v (output: %s)", err, out.String())
 	}
 	assertTablesExist(t, conn, true)
-	assertSchemaVersion(t, conn, "3")
+	assertSchemaVersion(t, conn, maxMigrationVersion(t))
 
 	// Requirement 2.2 dan 7.1: email unik tidak sensitif huruf besar-kecil.
 	_, err = conn.Exec(ctx, `INSERT INTO users (email, password_hash) VALUES ('Learner@Example.id', 'h')`)
@@ -261,6 +261,30 @@ func assertTablesExist(t *testing.T, conn *pgx.Conn, want bool) {
 			t.Fatalf("fungsi %s exists=%v, want %v", fn, exists, want)
 		}
 	}
+}
+
+// maxMigrationVersion mengembalikan nomor migrasi P0 terbesar yang ter-embed.
+func maxMigrationVersion(t *testing.T) string {
+	t.Helper()
+	entries, err := fs.ReadDir(migrations.FS, ".")
+	if err != nil {
+		t.Fatalf("membaca embed: %v", err)
+	}
+	max := 0
+	for _, e := range entries {
+		name := e.Name()
+		if !migrationFileRe.MatchString(name) || isP1Migration(name) {
+			continue
+		}
+		n, err := strconv.Atoi(strings.SplitN(name, "_", 2)[0])
+		if err != nil {
+			t.Fatalf("nomor migrasi %q tidak valid: %v", name, err)
+		}
+		if n > max {
+			max = n
+		}
+	}
+	return strconv.Itoa(max)
 }
 
 func assertSchemaVersion(t *testing.T, conn *pgx.Conn, want string) {

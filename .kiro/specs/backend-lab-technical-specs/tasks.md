@@ -78,7 +78,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Soft delete (`deleted_at`) dengan partial index `WHERE deleted_at IS NULL`.
     - _Requirements: 2.8, 3.1, 3.2, 3.3, 3.4, 3.5, 3.7, 3.8, 6.1, 6.2, 6.3, 6.4, 6.5, 20.1, 20.2, 22.6_
 
-  - [~] 2.3 Tulis migrasi `0004_ai_infra`
+  - [x] 2.3 Tulis migrasi `0004_ai_infra`
     - `ai_task_types`, `prompt_contracts` (unique `(task_type, version)`, partial unique `active` per `task_type`, trigger immutabilitas setelah keluar dari `draft`), `ai_provider_settings`, `ai_tasks` (termasuk `idempotency_key` unik), `ai_usage_logs`, `ai_injection_events`, `rate_buckets`.
     - `app_settings` diperluas: kolom `key` unik (`CHECK` pola `^[a-z][a-z0-9_.]*$`), `value` (jsonb), `value_schema` (jsonb objek JSON Schema), `description`, `is_initial_value` (default true), `updated_by` nullable, `created_at`, `updated_at`. Trigger `app_settings_mark_changed` menurunkan `is_initial_value` menjadi false pada setiap perubahan `value`, juga untuk UPDATE langsung ke database.
     - Tidak ada tabel `ai_quota_settings`. Kuota AI disimpan sebagai kunci `ai.quota.{scope}.{period}.{metric}` pada `app_settings`.
