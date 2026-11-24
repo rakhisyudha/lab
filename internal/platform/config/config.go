@@ -10,6 +10,8 @@ import (
 	"net/url"
 	"os"
 	"strings"
+
+	"github.com/joho/godotenv"
 )
 
 // Nama variabel environment.
@@ -70,6 +72,17 @@ type Config struct {
 	JWTSigningKey      Secret
 	CORSAllowedOrigins []string
 	SecretProvider     string
+}
+
+// LoadDotEnv memuat berkas .env bila ada. Variabel yang sudah ada di environment
+// processes tidak ditimpa, sehingga environment ( CI, container) tetap berlaku.
+// Tidak ada berkas .env bukan error.
+func LoadDotEnv() error {
+	err := godotenv.Load()
+	if errors.Is(err, os.ErrNotExist) {
+		return nil
+	}
+	return err
 }
 
 // Load membaca konfigurasi dari environment proses.

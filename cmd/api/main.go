@@ -49,6 +49,9 @@ func main() {
 }
 
 func run() error {
+	if err := config.LoadDotEnv(); err != nil {
+		return fmt.Errorf("api: membaca .env: %w", err)
+	}
 	withWorker := flag.Bool("with-worker", false, "jalankan worker di proses yang sama (single-instance/dev)")
 	flag.Parse()
 	_ = withWorker // worker AITask dipasang pada Phase 2.

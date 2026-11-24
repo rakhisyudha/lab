@@ -39,6 +39,9 @@ func main() {
 }
 
 func run() error {
+	if err := config.LoadDotEnv(); err != nil {
+		return fmt.Errorf("worker: membaca .env: %w", err)
+	}
 	cfg, err := config.Load()
 	if err != nil {
 		return err

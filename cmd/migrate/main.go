@@ -21,12 +21,18 @@ import (
 
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/pgx/v5"
+
+	"github.com/rakhisyudha/lab/internal/platform/config"
 )
 
 // errUsage dikembalikan bila perintah atau flag tidak dikenal.
 var errUsage = errors.New("pemakaian: migrate up [--include-p1] | migrate down --all [--include-p1] | migrate bootstrap-admin --email=... | migrate seed-prompts")
 
 func main() {
+	if err := config.LoadDotEnv(); err != nil {
+		fmt.Fprintln(os.Stderr, "migrate:", err)
+		os.Exit(1)
+	}
 	if err := run(os.Args[1:], os.Stdout, os.Stderr, os.LookupEnv); err != nil {
 		fmt.Fprintln(os.Stderr, "migrate:", err)
 		os.Exit(1)
