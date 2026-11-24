@@ -14,12 +14,14 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/rakhisyudha/lab/internal/ai/taskqueue"
 	"github.com/rakhisyudha/lab/internal/auth"
 	"github.com/rakhisyudha/lab/internal/content"
 	"github.com/rakhisyudha/lab/internal/platform/clock"
 	"github.com/rakhisyudha/lab/internal/platform/config"
 	"github.com/rakhisyudha/lab/internal/platform/db"
 	"github.com/rakhisyudha/lab/internal/platform/httpx"
+	"github.com/rakhisyudha/lab/internal/platform/ratelimit"
 	"github.com/rakhisyudha/lab/internal/platform/settings"
 	"github.com/rakhisyudha/lab/internal/progress"
 )
@@ -62,6 +64,18 @@ func run() error {
 	authHandler := auth.NewHandler(authSvc)
 	middleware := auth.NewMiddleware(issuer)
 
+	var limiter ratelimit.Store
+	if cfg.RateLimitStore == config.StoreMemory {
+		limiter = ratelimit.NewMemoryStore()
+	} else {
+		limiter = ratelimit.NewPostgresStore(pool)
+	}
+	authLimiter := ratelimit.NewMiddleware(limiter, "auth", 10, 10.0/60.0, c)
+	generalLimiter := ratelimit.NewMiddleware(limiter, "general", 120, 2, c)
+
+	postgresQueue := taskqueue.NewPostgresQueue(pool)
+	taskHandler := taskqueue.NewHandler(postgresQueue)
+
 	contentHandler := content.NewHandler(content.NewStore(pool))
 	progressHandler := progress.NewHandler(progress.NewStore(pool))
 
@@ -71,9 +85,12 @@ func run() error {
 		HealthCheck:        func(ctx context.Context) error { return pool.Ping(ctx) },
 	})
 
-	authHandler.RegisterRoutes(api, middleware)
+	api.Use(generalLimiter)
+	authHandler.RegisterRoutes(api, middleware, authLimiter)
 	contentHandler.RegisterRoutes(api, api.Group("/admin", middleware.Authenticate(), auth.RequireRole("admin")))
 	progressHandler.RegisterRoutes(api.Group("/me", middleware.Authenticate()))
+	adminGroup := api.Group("/admin", middleware.Authenticate(), auth.RequireRole("admin"))
+	taskHandler.RegisterRoutes(api, adminGroup, middleware.Authenticate())
 
 	addr := os.Getenv("PORT")
 	if addr == "" {

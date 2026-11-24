@@ -24,7 +24,7 @@ import (
 )
 
 // errUsage dikembalikan bila perintah atau flag tidak dikenal.
-var errUsage = errors.New("pemakaian: migrate up [--include-p1] | migrate down --all [--include-p1] | migrate bootstrap-admin --email=...")
+var errUsage = errors.New("pemakaian: migrate up [--include-p1] | migrate down --all [--include-p1] | migrate bootstrap-admin --email=... | migrate seed-prompts")
 
 func main() {
 	if err := run(os.Args[1:], os.Stdout, os.Stderr, os.LookupEnv); err != nil {
@@ -67,6 +67,9 @@ func run(args []string, stdout, stderr io.Writer, lookup func(string) (string, b
 
 	case "bootstrap-admin":
 		return bootstrapAdmin(rest, stdout, stderr, lookup)
+
+	case "seed-prompts":
+		return seedPrompts(rest, stdout, stderr, lookup)
 
 	default:
 		return fmt.Errorf("perintah %q tidak dikenal. %w", cmd, errUsage)

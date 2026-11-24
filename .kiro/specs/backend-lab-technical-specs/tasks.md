@@ -185,7 +185,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Validates: Requirements 5.1, 5.2, 5.3**
 
   - [x] 4.3 Implementasi workflow Translation sebagai fungsi murni dan service
-    - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`→`in_review`, `in_review`→`draft`, `in_review`→`published`, `published`→`archived`, `archived`→`draft`), `invalid_status_transition` dan `version_conflict` (409).
+    - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`â†’`in_review`, `in_review`â†’`draft`, `in_review`â†’`published`, `published`â†’`archived`, `archived`â†’`draft`), `invalid_status_transition` dan `version_conflict` (409).
     - Translation baru berstatus `draft` dengan `version` 1. Ubah teks menaikkan `version` lewat `UPDATE ... WHERE version = $2`. Edit pada `published` mengembalikan ke `draft` dan mengosongkan `published_at`. Transisi ke `published` mensyaratkan `reviewer_id` ber-role `admin` dan mengisi `reviewed_at`, `published_at`.
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 26.4_
 
@@ -242,32 +242,32 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
 ### Phase 2: AI foundation
 
 - [ ] 8. Provider abstraction
-  - [~] 8.1 Implementasi interface `Provider`, tipe error, dan adapter
+  - [x] 8.1 Implementasi interface `Provider`, tipe error, dan adapter
     - `internal/ai/provider`: `Provider{Name, Complete}`, error bertipe `RateLimited{RetryAfter}`, `Timeout`, `Server`, `Client`.
     - Adapter provider sesuai `ai_provider_settings` (RPM, TPM, urutan fallback) dan `provider/replay` yang memutar respons terekam (dari `golden_recordings` atau fixture) untuk mode `recorded` dan CI.
     - _Requirements: 16.9, 16.15, 17.12_
 
-  - [~] 8.2 Implementasi `BackoffDelay` dan `SelectProvider`
+  - [x] 8.2 Implementasi `BackoffDelay` dan `SelectProvider`
     - Exponential backoff dengan jitter (nilai acak disuntikkan), menghormati `Retry-After`. `SelectProvider` memilih provider berikutnya menurut urutan fallback dan cooldown. Keduanya fungsi murni (Requirement 26.4).
     - _Requirements: 16.8, 16.9, 26.4_
 
-  - [~] 8.3 Write property test untuk backoff dan pemilihan provider
+  - [x] 8.3 Write property test untuk backoff dan pemilihan provider
     - **Property 21: Backoff berbatas dan pemilihan provider monoton**
     - **Kategori:** Wajib (area 6: token bucket dan backoff). Nama test `TestPropW21_<Judul>`.
     - **Validates: Requirements 16.8, 16.9, 26.2**
 
 - [ ] 9. Rate limiting
-  - [~] 9.1 Implementasi token bucket dan middleware HTTP
+  - [x] 9.1 Implementasi token bucket dan middleware HTTP
     - `platform/ratelimit`: `TryTake` sebagai fungsi murni (Requirement 26.4) dan interface `BucketStore.TryTake` dengan implementasi `memory` dan `postgres` (`rate_buckets`, `SELECT ... FOR UPDATE`) dipilih lewat `RATELIMIT_STORE` (default `postgres`, `memory` hanya single-instance atau dev). Bucket RPM dan TPM per provider memakai store yang sama sehingga dibagi antar instance pada mode `postgres`.
     - Middleware per kelas endpoint (auth, AI, umum) dengan `capacity` dan `refill_rate`. Respons 429 `rate_limited` dengan header `Retry-After` dalam detik.
     - Fungsi `PurgeIdleBuckets` untuk menghapus bucket penuh yang tidak aktif lebih dari 1 jam (dijadwalkan pada tugas 10.6).
     - _Requirements: 9.9, 16.6, 16.7, 16.15, 16.17, 16.18, 26.4_
 
-  - [~] 9.2 Pasang rate limit pada endpoint auth
+  - [x] 9.2 Pasang rate limit pada endpoint auth
     - Batasi `login` dan `register` per alamat IP dan per email memakai bucket pada 9.1.
     - _Requirements: 8.10, 9.9_
 
-  - [~] 9.3 Write property test untuk token bucket
+  - [x] 9.3 Write property test untuk token bucket
     - **Property 20: Token bucket menjaga batas kapasitas dan laju**
     - **Kategori:** Wajib (area 6: token bucket dan backoff). Nama test `TestPropW20_<Judul>`.
     - **Validates: Requirements 16.6, 16.7, 26.2**
@@ -277,18 +277,18 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 16.17, 16.18_
 
 - [ ] 10. Task service
-  - [~] 10.1 Implementasi `NextTaskState` sebagai fungsi murni
-    - `internal/evaluation/tasklife.go`: transisi hanya `queued`→`processing` (`run_after <= now`), `processing`→`completed`, `processing`→`queued` (`requeue` dengan `count_attempt`), `processing`→`failed`, dan `lock_expired` (kembali ke `queued` bila `attempts < max_attempts`, selain itu `failed` dengan `ai_provider_unavailable`). `completed` dan `failed` terminal, transisi lain menghasilkan `invalid_task_transition`.
+  - [x] 10.1 Implementasi `NextTaskState` sebagai fungsi murni
+    - `internal/evaluation/tasklife.go`: transisi hanya `queued`â†’`processing` (`run_after <= now`), `processing`â†’`completed`, `processing`â†’`queued` (`requeue` dengan `count_attempt`), `processing`â†’`failed`, dan `lock_expired` (kembali ke `queued` bila `attempts < max_attempts`, selain itu `failed` dengan `ai_provider_unavailable`). `completed` dan `failed` terminal, transisi lain menghasilkan `invalid_task_transition`.
     - Invarian: `status = processing` jika dan hanya jika `locked_at` terisi, `completed` memiliki `result`, `failed` memiliki `error_code`, `0 <= attempts <= max_attempts`.
     - _Requirements: 16.5, 16.10, 16.13, 26.4_
 
-  - [~] 10.2 Write property test untuk siklus status AITask
+  - [x] 10.2 Write property test untuk siklus status AITask
     - **Property 29: Siklus status AITask mengikuti state machine dan menjaga invarian**
     - **Kategori:** Wajib (area 7: aturan status dan lifecycle, AITask). Nama test `TestPropW29_<Judul>`.
     - Urutan peristiwa acak (`dequeue`, `complete`, `requeue`, `fail`, `lock_expired`) pada waktu non-menurun terhadap `NextTaskState`.
     - **Validates: Requirements 16.5, 16.10, 16.13, 26.2**
 
-  - [~] 10.3 Implementasi `Queue` AITask pada PostgreSQL dan versi in-memory
+  - [x] 10.3 Implementasi `Queue` AITask pada PostgreSQL dan versi in-memory
     - `internal/ai/taskqueue`: `Enqueue`, `Dequeue` (`FOR UPDATE SKIP LOCKED`, urut `(priority, run_after, created_at)`), `Complete`, `Requeue`, `Fail`, `ReapStale`. Setiap perubahan status memakai `NextTaskState`.
     - `Enqueue` menghormati `idempotency_key` (unique `ai_tasks_idem_uk`): kunci sama dari user sama mengembalikan task yang sama (header `Idempotency-Key`, design 2.1). Batas `per_user_queue_limit` diperiksa atomik dan semua atau tidak sama sekali (`ai_queue_limit_exceeded`).
     - `ReapStale` juga menaikkan task priority 3 yang menunggu lebih dari 15 menit menjadi priority 2 (aging, design 4.9).
@@ -296,18 +296,18 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Satu suite test kontrak yang dijalankan pada kedua implementasi.
     - _Requirements: 16.5, 16.11, 16.12, 16.13, 16.15, 16.17, 16.18_
 
-  - [~] 10.4 Write property test untuk antrean AITask
+  - [x] 10.4 Write property test untuk antrean AITask
     - **Property 22: Antrean AITask memilih menurut prioritas dan menolak melebihi batas per user**
     - **Kategori:** Wajib (area 7: aturan status dan lifecycle, AITask). Nama test `TestPropW22_<Judul>`.
     - Implementasi in-memory dari antarmuka `Queue`, pengurutan referensi.
     - **Validates: Requirements 16.11, 16.12, 26.2**
 
-  - [~] 10.5 Implementasi Quota_Manager
+  - [x] 10.5 Implementasi Quota_Manager
     - Baca kuota dari App_Settings (kunci `ai.quota.{scope}.{period}.{metric}`, scope `global` dan `user`, periode harian dan bulanan, metrik `requests` atau `total_tokens`, nilai `null` berarti tanpa batas, seluruh delapan kombinasi disemai sehingga dapat diubah Admin, DA-16) lewat `Settings.Snapshot`. Pemakaian periode berjalan dihitung dari `ai_usage_logs` sebelum task diterima. Tidak ada tabel `ai_quota_settings` dan tidak ada override kuota per user di P0.
     - Kembalikan 429 `ai_quota_exceeded` dengan `details.reset_at` (UTC, awal periode berikutnya) dan 429 `ai_queue_limit_exceeded` bila melewati `ai.per_user_queue_limit`. Perubahan kuota oleh Admin berlaku pada `Enqueue` berikutnya tanpa deploy.
     - _Requirements: 16.2, 16.3, 16.4, 16.11, 24.2_
 
-  - [~] 10.6 Implementasi worker runner dan endpoint status AITask
+  - [x] 10.6 Implementasi worker runner dan endpoint status AITask
     - `cmd/worker`: loop dequeue, registry handler per `task_type`, reaper `lock_timeout`, penjadwal job (termasuk `PurgeIdleBuckets`), graceful shutdown (timeout 30 detik).
     - `GET /ai-tasks/{id}` (pemilik dan admin, tanpa `payload`, `result`, atau teks jawaban) dan `GET /admin/ai-tasks` dengan filter.
     - _Requirements: 10.12, 16.5, 16.13, 16.16, 16.17_
@@ -317,13 +317,13 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 16.13_
 
 - [ ] 11. Prompt gateway
-  - [~] 11.1 Implementasi Prompt_Contract, registry, dan `seed-prompts`
+  - [x] 11.1 Implementasi Prompt_Contract, registry, dan `seed-prompts`
     - Berkas `prompts/{answer_evaluation,interview_followup,interview_evaluation}/v1.json` (embed `go:embed`) dengan `contract_id`, `task_type`, `version`, `locale_policy`, `input_schema`, `output_schema`, `system_prompt`, `parameters`, `status`, serta contoh input, output valid, dan output tidak valid.
     - Loader dari tabel `prompt_contracts` dan `cmd/migrate seed-prompts` yang idempoten berdasarkan `(task_type, version, content_sha256)`.
     - AI tutoring tidak termasuk P0 (hanya ekstensi lewat Task_Type baru).
     - _Requirements: 15.1, 15.2, 15.5, 15.8, 15.9_
 
-  - [~] 11.2 Implementasi guard anti prompt injection dan `Render`
+  - [x] 11.2 Implementasi guard anti prompt injection dan `Render`
     - `ai/guard`: `Sanitize` (netralkan string mirip delimiter, nonce aktif, karakter kontrol, panjang maksimum) dan detektor heuristik yang menulis `ai_injection_events` tanpa menghentikan penilaian.
     - `ai/prompt.Render`: dua pesan. `system` tanpa teks Learner, `user` berisi isi Learner di antara delimiter dengan nonce acak per pemanggilan.
     - _Requirements: 15.7, 23.1, 23.2, 23.5_
@@ -334,7 +334,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Tambahkan fuzz test `go test -fuzz` untuk `guard.Sanitize`.
     - **Validates: Requirements 23.1, 23.2**
 
-  - [~] 11.4 Implementasi validator JSON Schema dan `ValidateEvaluatorOutput`
+  - [x] 11.4 Implementasi validator JSON Schema dan `ValidateEvaluatorOutput`
     - `ai/schema` dengan `additionalProperties: false`. Pemeriksaan katalog: `misconception_codes` dalam katalog aktif Topic, `resolved_misconception_codes` dalam daftar `detected` Learner, kedua daftar tidak beririsan, `concept_results` tepat satu entri per Concept input, `score_hint` 0 sampai 100, `confidence` 0 sampai 1.
     - _Requirements: 14.3, 14.4, 14.5, 23.3_
 
@@ -344,7 +344,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Mutator pada output valid (field tambahan termasuk `severity`, kode di luar input, Concept hilang atau ganda, irisan kode, nilai di luar rentang).
     - **Validates: Requirements 14.3, 14.4, 14.5, 23.3**
 
-  - [~] 11.6 Implementasi pipeline `Gateway.Run`
+  - [x] 11.6 Implementasi pipeline `Gateway.Run`
     - Render prompt, ambil token bucket RPM dan TPM provider (jadwalkan ulang AITask dengan `run_after` bila kurang), panggil provider, validasi output, ulang hingga `ai.max_validation_retries` (default 2), fallback provider, tetapkan `failed` dengan `ai_provider_unavailable` atau `validation_failed`.
     - Tulis satu baris `ai_usage_logs` per percobaan, termasuk yang gagal. Pemanggilan provider tidak berada di dalam transaksi database.
     - _Requirements: 14.6, 16.7, 16.8, 16.9, 16.10, 16.14, 23.4_
@@ -354,18 +354,18 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 14.6, 16.8, 16.9, 16.10, 16.14_
 
 - [ ] 12. Evaluator dasar
-  - [~] 12.1 Implementasi `ScoreAnswer` dan pengambilan parameter
+  - [x] 12.1 Implementasi `ScoreAnswer` dan pengambilan parameter
     - `internal/evaluation/scoring.go`: skor rubrik dari `concept_results` berbobot, penalti Misconception `minor` (dibatasi `minor_penalty_cap`), batas `critical_score_cap`, skor `clamp_min` untuk `relevance` `off_topic` atau `empty`, `clamp` ke `[clamp_min, clamp_max]`, `round2` half-up dengan desimal presisi tetap. Fungsi murni (Requirement 26.4).
     - `severity` diambil dari database, `score_hint` hanya sinyal konsistensi (`needs_review`).
     - Parameter `P.x` diambil sebagai snapshot dari `Settings.Snapshot` (tugas 1.6) dan dicatat pada `params_snapshot`. Seluruh nilai default adalah Initial_Value, bukan nilai final.
     - _Requirements: 13.11, 14.8, 14.9, 20.8, 20.9, 24.5, 24.7, 26.4_
 
-  - [~] 12.2 Write property test untuk batas dan determinisme skor
+  - [x] 12.2 Write property test untuk batas dan determinisme skor
     - **Property 11: Skor jawaban berada dalam batas, deterministik, dan tidak bergantung pada skor AI**
     - **Kategori:** Wajib (area 1: scoring free-text). Nama test `TestPropW11_<Judul>`.
     - **Validates: Requirements 13.11, 14.9, 20.8, 20.9, 23.4, 26.2**
 
-  - [~] 12.3 Write property test untuk monotonisitas skor
+  - [x] 12.3 Write property test untuk monotonisitas skor
     - **Property 12: Skor jawaban monoton terhadap coverage Concept**
     - **Kategori:** Wajib (area 1: scoring free-text). Nama test `TestPropW12_<Judul>`.
     - **Validates: Requirements 20.8, 26.2**

@@ -246,8 +246,9 @@ func (h *Handler) PatchUser(c *gin.Context) {
 
 // RegisterRoutes memasang endpoint auth di grup yang sudah terautentikasi
 // maupun yang publik. Grup `api` adalah /api/v1.
-func (h *Handler) RegisterRoutes(api *gin.RouterGroup, mw *Middleware) {
+func (h *Handler) RegisterRoutes(api *gin.RouterGroup, mw *Middleware, limiters ...gin.HandlerFunc) {
 	authGroup := api.Group("/auth")
+	authGroup.Use(limiters...)
 	{
 		authGroup.POST("/register", h.Register)
 		authGroup.POST("/login", h.Login)
