@@ -1,744 +1,801 @@
 {
-  "pbtResults": {},
-  "executionHistory": {
-    "1.1 Inisialisasi module Go, struktur direktori, dan paket `platform`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465824950
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465849266
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795466328285
-      }
-    ],
-    "1.2 Implementasi `platform/httpx`: Error_Envelope, middleware, dan health check": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465825746
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795466344991
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795480401545
-      }
-    ],
-    "1.4 Implementasi helper pagination cursor dan offset": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465825849
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795466345067
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795480401717
-      }
-    ],
-    "1.6 Implementasi service App_Settings di `platform/settings`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465825937
-      }
-    ],
-    "2.1 Siapkan `cmd/migrate` dan tulis migrasi `0001_helpers` serta `0002_locales_auth`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465825994
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795466345179
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795480401807
-      }
-    ],
-    "2.2 Tulis migrasi `0003_content`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826045
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795480420957
-      },
-      {
-        "executionId": "0e59fd7a-11ac-445e-a84b-ce653fe9a553",
-        "chatSessionId": "sess_1f9b4225-7f06-42f1-a9ca-885c7b3a6892",
-        "timestamp": 1795481252593
-      },
-      {
-        "executionId": "0e59fd7a-11ac-445e-a84b-ce653fe9a553",
-        "chatSessionId": "sess_1f9b4225-7f06-42f1-a9ca-885c7b3a6892",
-        "timestamp": 1795481260310
-      },
-      {
-        "executionId": "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
-        "chatSessionId": "sess_df4c7d17effe2AV16D3BJdbUm4",
-        "timestamp": 1795484696111
-      }
-    ],
-    "2.3 Tulis migrasi `0004_ai_infra`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826156
-      },
-      {
-        "executionId": "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
-        "chatSessionId": "sess_df4c7d17effe2AV16D3BJdbUm4",
-        "timestamp": 1795484710000
-      }
-    ],
-    "2.4 Tulis migrasi `0005_assessment` dan `0006_interview`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826236
-      },
-      {
-        "executionId": "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
-        "chatSessionId": "sess_df4c7d17effe2AV16D3BJdbUm4",
-        "timestamp": 1795484730000
-      }
-    ],
-    "2.5 Tulis migrasi `0007_evaluation_progress` dan `0008_golden_set`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826299
-      },
-      {
-        "executionId": "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
-        "chatSessionId": "sess_df4c7d17effe2AV16D3BJdbUm4",
-        "timestamp": 1795484750000
-      }
-    ],
-    "2.6 Tulis migrasi `0009_seed_reference` dan skrip verifikasi migrasi CI": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826378
-      },
-      {
-        "executionId": "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
-        "chatSessionId": "sess_df4c7d17effe2AV16D3BJdbUm4",
-        "timestamp": 1795484800000
-      }
-    ],
-    "3.1 Implementasi primitif kriptografi dan kebijakan password di `internal/auth`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826460
-      },
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795480421206
-      },
-      {
-        "executionId": "0e59fd7a-11ac-445e-a84b-ce653fe9a553",
-        "chatSessionId": "sess_1f9b4225-7f06-42f1-a9ca-885c7b3a6892",
-        "timestamp": 1795481252446
-      },
-      {
-        "executionId": "0e59fd7a-11ac-445e-a84b-ce653fe9a553",
-        "chatSessionId": "sess_1f9b4225-7f06-42f1-a9ca-885c7b3a6892",
-        "timestamp": 1795481252702
-      }
-    ],
-    "3.2 Implementasi penerbitan dan validasi Access_Token serta middleware role": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826512
-      }
-    ],
-    "3.3 Implementasi invitation dan register atomik": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826563
-      }
-    ],
-    "3.5 Implementasi login, rotasi refresh tanpa grace window, logout, dan endpoint `/me`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826630
-      }
-    ],
-    "3.6 Write property test untuk rotasi Refresh_Token": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826693
-      }
-    ],
-    "3.7 Implementasi admin users dan perintah `bootstrap-admin`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826753
-      }
-    ],
-    "3.10 Tulis contoh klien single-flight refresh untuk Astro dan Svelte": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826816
-      }
-    ],
-    "4.1 Implementasi resolusi Locale dan filter Published_Translation sebagai fungsi murni": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826876
-      }
-    ],
-    "4.3 Implementasi workflow Translation sebagai fungsi murni dan service": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826936
-      }
-    ],
-    "4.4 Write property test untuk workflow Translation": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465826999
-      }
-    ],
-    "4.5 Implementasi endpoint konten Learner": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827061
-      }
-    ],
-    "5.1 Implementasi CRUD admin untuk entitas induk": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827125
-      }
-    ],
-    "5.2 Implementasi endpoint Translation admin": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827190
-      }
-    ],
-    "5.3 Implementasi katalog Misconception dan prasyarat Topic": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827262
-      }
-    ],
-    "6.1 Implementasi repository dan endpoint progress": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827322
-      }
-    ],
-    "7. Checkpoint Phase 1": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827378
-      }
-    ],
-    "8.1 Implementasi interface `Provider`, tipe error, dan adapter": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827432
-      }
-    ],
-    "8.2 Implementasi `BackoffDelay` dan `SelectProvider`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827490
-      }
-    ],
-    "8.3 Write property test untuk backoff dan pemilihan provider": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827544
-      }
-    ],
-    "9.1 Implementasi token bucket dan middleware HTTP": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827600
-      }
-    ],
-    "9.2 Pasang rate limit pada endpoint auth": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827649
-      }
-    ],
-    "9.3 Write property test untuk token bucket": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827703
-      }
-    ],
-    "10.1 Implementasi `NextTaskState` sebagai fungsi murni": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827761
-      }
-    ],
-    "10.2 Write property test untuk siklus status AITask": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827817
-      }
-    ],
-    "10.3 Implementasi `Queue` AITask pada PostgreSQL dan versi in-memory": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827869
-      }
-    ],
-    "10.4 Write property test untuk antrean AITask": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827919
-      }
-    ],
-    "10.5 Implementasi Quota_Manager": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465827974
-      }
-    ],
-    "10.6 Implementasi worker runner dan endpoint status AITask": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828028
-      }
-    ],
-    "11.1 Implementasi Prompt_Contract, registry, dan `seed-prompts`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828082
-      }
-    ],
-    "11.2 Implementasi guard anti prompt injection dan `Render`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828132
-      }
-    ],
-    "11.4 Implementasi validator JSON Schema dan `ValidateEvaluatorOutput`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828192
-      }
-    ],
-    "11.6 Implementasi pipeline `Gateway.Run`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828243
-      }
-    ],
-    "12.1 Implementasi `ScoreAnswer` dan pengambilan parameter": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828315
-      }
-    ],
-    "12.2 Write property test untuk batas dan determinisme skor": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828388
-      }
-    ],
-    "12.3 Write property test untuk monotonisitas skor": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828442
-      }
-    ],
-    "12.4 Implementasi service Evaluator `answer_evaluation`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828501
-      }
-    ],
-    "13.1 Implementasi `ValidateCase` dan endpoint CRUD Golden_Set": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828553
-      }
-    ],
-    "13.3 Implementasi metrik, gate, regresi, baseline, dan Runner inti": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828616
-      }
-    ],
-    "13.5 Implementasi mode `recorded` dan `live`, perekaman response, dan endpoint run": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828713
-      }
-    ],
-    "13.7 Siapkan fixture Golden_Set v0": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828767
-      }
-    ],
-    "14.1 Implementasi endpoint konfigurasi provider AI": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828822
-      }
-    ],
-    "14.2 Implementasi endpoint Prompt_Contract dan gate aktivasi": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828879
-      }
-    ],
-    "14.4 Implementasi endpoint App_Settings dan view kuota AI": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828943
-      }
-    ],
-    "15. Checkpoint Phase 2": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465828997
-      }
-    ],
-    "16.1 Implementasi pembuatan attempt dan pembacaan hasil": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829046
-      }
-    ],
-    "16.2 Implementasi `ApplyEvaluationEvent` sebagai fungsi murni": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829098
-      }
-    ],
-    "16.3 Implementasi simpan jawaban dan submit": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829159
-      }
-    ],
-    "16.4 Implementasi Evaluation_Retry untuk jawaban assessment": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829221
-      }
-    ],
-    "16.5 Write property test untuk siklus Answer_Evaluation_Status": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829276
-      }
-    ],
-    "17.1 Implementasi handler AITask `answer_evaluation` beserta penyimpanan": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829330
-      }
-    ],
-    "17.2 Implementasi `ApplyMisconceptionSignals` pada paket `misconception`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829384
-      }
-    ],
-    "17.3 Write property test untuk siklus Misconception": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829439
-      }
-    ],
-    "18.1 Implementasi `ComputeMastery` sebagai fungsi murni": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829495
-      }
-    ],
-    "18.2 Write property test untuk karakterisasi MASTERED": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829550
-      }
-    ],
-    "18.3 Write property test untuk determinisme Mastery": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829614
-      }
-    ],
-    "18.4 Implementasi `AggregateAssessment` dan `RecordAttempt`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829677
-      }
-    ],
-    "18.5 Write property test untuk agregasi Attempt": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829730
-      }
-    ],
-    "18.6 Hubungkan finalisasi attempt, `RecomputeMastery`, dan resolusi manual Admin": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829786
-      }
-    ],
-    "18.8 Write property test untuk skor Attempt dari jawaban scored": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829843
-      }
-    ],
-    "18.9 Implementasi job `UnscoreExpiredFailedAnswers`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829898
-      }
-    ],
-    "19.1 Implementasi `Recommend` sebagai fungsi murni": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465829951
-      }
-    ],
-    "19.2 Write property test untuk rule engine rekomendasi": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830005
-      }
-    ],
-    "19.3 Implementasi endpoint rekomendasi dan Roadmap Learner": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830057
-      }
-    ],
-    "20. Checkpoint Phase 3": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830111
-      }
-    ],
-    "21.1 Implementasi profil dan pembuatan sesi": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830171
-      }
-    ],
-    "21.2 Implementasi state machine sesi dan endpoint lifecycle": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830226
-      }
-    ],
-    "21.3 Write property test untuk transisi sesi": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830282
-      }
-    ],
-    "21.4 Write property test untuk pause dan resume": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830338
-      }
-    ],
-    "21.5 Implementasi job terjadwal pada worker": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830392
-      }
-    ],
-    "22.1 Implementasi `AllocateFollowUp` dan `NextStep` sebagai fungsi murni": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830451
-      }
-    ],
-    "22.2 Write property test untuk alokasi follow-up": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830546
-      }
-    ],
-    "22.3 Implementasi endpoint jawaban dan orchestrator `OnAnswerEvaluated`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830608
-      }
-    ],
-    "23.1 Implementasi `ScoreInterview` dan `AggregateInterviewTopic`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830663
-      }
-    ],
-    "23.2 Write property test untuk skor interview": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830722
-      }
-    ],
-    "23.3 Write property test untuk agregasi per Topic pada interview": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830778
-      }
-    ],
-    "23.4 Implementasi finalisasi sesi dan handler `interview_evaluation`": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830834
-      }
-    ],
-    "23.5 Implementasi report interview": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830897
-      }
-    ],
-    "23.7 Implementasi Evaluation_Retry untuk jawaban interview": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465830948
-      }
-    ],
-    "23.8 Write property test untuk skor Attempt interview dari jawaban scored": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465831003
-      }
-    ],
-    "24.1 Tambahkan contract test untuk contoh JSON dan DTO": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465831053
-      }
-    ],
-    "24.2 Konfigurasi pipeline CI dan gerbang property wajib": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465831124
-      }
-    ],
-    "25. Checkpoint Phase 4": [
-      {
-        "executionId": "a191ef6a-9490-4b70-988e-17c22e626182",
-        "chatSessionId": "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
-        "timestamp": 1795465831181
-      }
-    ]
-  }
+    "pbtResults":  {
+
+                   },
+    "executionHistory":  {
+                             "1.1 Inisialisasi module Go, struktur direktori, dan paket `platform`":  [
+                                                                                                          {
+                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                              "timestamp":  1795465824950
+                                                                                                          },
+                                                                                                          {
+                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                              "timestamp":  1795465849266
+                                                                                                          },
+                                                                                                          {
+                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                              "timestamp":  1795466328285
+                                                                                                          }
+                                                                                                      ],
+                             "1.2 Implementasi `platform/httpx`: Error_Envelope, middleware, dan health check":  [
+                                                                                                                     {
+                                                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                         "timestamp":  1795465825746
+                                                                                                                     },
+                                                                                                                     {
+                                                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                         "timestamp":  1795466344991
+                                                                                                                     },
+                                                                                                                     {
+                                                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                         "timestamp":  1795480401545
+                                                                                                                     }
+                                                                                                                 ],
+                             "1.4 Implementasi helper pagination cursor dan offset":  [
+                                                                                          {
+                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                              "timestamp":  1795465825849
+                                                                                          },
+                                                                                          {
+                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                              "timestamp":  1795466345067
+                                                                                          },
+                                                                                          {
+                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                              "timestamp":  1795480401717
+                                                                                          }
+                                                                                      ],
+                             "1.6 Implementasi service App_Settings di `platform/settings`":  [
+                                                                                                  {
+                                                                                                      "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                      "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                      "timestamp":  1795465825937
+                                                                                                  },
+                                                                                                  {
+                                                                                                      "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                      "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                      "timestamp":  1795484900000
+                                                                                                  }
+                                                                                              ],
+                             "2.1 Siapkan `cmd/migrate` dan tulis migrasi `0001_helpers` serta `0002_locales_auth`":  [
+                                                                                                                          {
+                                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                              "timestamp":  1795465825994
+                                                                                                                          },
+                                                                                                                          {
+                                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                              "timestamp":  1795466345179
+                                                                                                                          },
+                                                                                                                          {
+                                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                              "timestamp":  1795480401807
+                                                                                                                          }
+                                                                                                                      ],
+                             "2.2 Tulis migrasi `0003_content`":  [
+                                                                      {
+                                                                          "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                          "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                          "timestamp":  1795465826045
+                                                                      },
+                                                                      {
+                                                                          "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                          "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                          "timestamp":  1795480420957
+                                                                      },
+                                                                      {
+                                                                          "executionId":  "0e59fd7a-11ac-445e-a84b-ce653fe9a553",
+                                                                          "chatSessionId":  "sess_1f9b4225-7f06-42f1-a9ca-885c7b3a6892",
+                                                                          "timestamp":  1795481252593
+                                                                      },
+                                                                      {
+                                                                          "executionId":  "0e59fd7a-11ac-445e-a84b-ce653fe9a553",
+                                                                          "chatSessionId":  "sess_1f9b4225-7f06-42f1-a9ca-885c7b3a6892",
+                                                                          "timestamp":  1795481260310
+                                                                      },
+                                                                      {
+                                                                          "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                          "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                          "timestamp":  1795484696111
+                                                                      }
+                                                                  ],
+                             "2.3 Tulis migrasi `0004_ai_infra`":  [
+                                                                       {
+                                                                           "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                           "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                           "timestamp":  1795465826156
+                                                                       },
+                                                                       {
+                                                                           "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                           "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                           "timestamp":  1795484710000
+                                                                       }
+                                                                   ],
+                             "2.4 Tulis migrasi `0005_assessment` dan `0006_interview`":  [
+                                                                                              {
+                                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                  "timestamp":  1795465826236
+                                                                                              },
+                                                                                              {
+                                                                                                  "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                  "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                  "timestamp":  1795484730000
+                                                                                              }
+                                                                                          ],
+                             "2.5 Tulis migrasi `0007_evaluation_progress` dan `0008_golden_set`":  [
+                                                                                                        {
+                                                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                            "timestamp":  1795465826299
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                            "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                            "timestamp":  1795484750000
+                                                                                                        }
+                                                                                                    ],
+                             "2.6 Tulis migrasi `0009_seed_reference` dan skrip verifikasi migrasi CI":  [
+                                                                                                             {
+                                                                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                 "timestamp":  1795465826378
+                                                                                                             },
+                                                                                                             {
+                                                                                                                 "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                 "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                 "timestamp":  1795484800000
+                                                                                                             }
+                                                                                                         ],
+                             "3.1 Implementasi primitif kriptografi dan kebijakan password di `internal/auth`":  [
+                                                                                                                     {
+                                                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                         "timestamp":  1795465826460
+                                                                                                                     },
+                                                                                                                     {
+                                                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                         "timestamp":  1795480421206
+                                                                                                                     },
+                                                                                                                     {
+                                                                                                                         "executionId":  "0e59fd7a-11ac-445e-a84b-ce653fe9a553",
+                                                                                                                         "chatSessionId":  "sess_1f9b4225-7f06-42f1-a9ca-885c7b3a6892",
+                                                                                                                         "timestamp":  1795481252446
+                                                                                                                     },
+                                                                                                                     {
+                                                                                                                         "executionId":  "0e59fd7a-11ac-445e-a84b-ce653fe9a553",
+                                                                                                                         "chatSessionId":  "sess_1f9b4225-7f06-42f1-a9ca-885c7b3a6892",
+                                                                                                                         "timestamp":  1795481252702
+                                                                                                                     },
+                                                                                                                     {
+                                                                                                                         "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                         "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                         "timestamp":  1795484900001
+                                                                                                                     }
+                                                                                                                 ],
+                             "3.2 Implementasi penerbitan dan validasi Access_Token serta middleware role":  [
+                                                                                                                 {
+                                                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                     "timestamp":  1795465826512
+                                                                                                                 },
+                                                                                                                 {
+                                                                                                                     "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                     "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                     "timestamp":  1795484900002
+                                                                                                                 }
+                                                                                                             ],
+                             "3.3 Implementasi invitation dan register atomik":  [
+                                                                                     {
+                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                         "timestamp":  1795465826563
+                                                                                     },
+                                                                                     {
+                                                                                         "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                         "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                         "timestamp":  1795484900003
+                                                                                     }
+                                                                                 ],
+                             "3.5 Implementasi login, rotasi refresh tanpa grace window, logout, dan endpoint `/me`":  [
+                                                                                                                           {
+                                                                                                                               "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                               "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                               "timestamp":  1795465826630
+                                                                                                                           },
+                                                                                                                           {
+                                                                                                                               "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                               "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                               "timestamp":  1795484900004
+                                                                                                                           }
+                                                                                                                       ],
+                             "3.6 Write property test untuk rotasi Refresh_Token":  [
+                                                                                        {
+                                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                            "timestamp":  1795465826693
+                                                                                        },
+                                                                                        {
+                                                                                            "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                            "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                            "timestamp":  1795484900005
+                                                                                        }
+                                                                                    ],
+                             "3.7 Implementasi admin users dan perintah `bootstrap-admin`":  [
+                                                                                                 {
+                                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                     "timestamp":  1795465826753
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                     "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                     "timestamp":  1795484900006
+                                                                                                 }
+                                                                                             ],
+                             "3.10 Tulis contoh klien single-flight refresh untuk Astro dan Svelte":  [
+                                                                                                          {
+                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                              "timestamp":  1795465826816
+                                                                                                          },
+                                                                                                          {
+                                                                                                              "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                              "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                              "timestamp":  1795484900007
+                                                                                                          }
+                                                                                                      ],
+                             "4.1 Implementasi resolusi Locale dan filter Published_Translation sebagai fungsi murni":  [
+                                                                                                                            {
+                                                                                                                                "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                                "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                                "timestamp":  1795465826876
+                                                                                                                            },
+                                                                                                                            {
+                                                                                                                                "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                                "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                                "timestamp":  1795484900008
+                                                                                                                            }
+                                                                                                                        ],
+                             "4.3 Implementasi workflow Translation sebagai fungsi murni dan service":  [
+                                                                                                            {
+                                                                                                                "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                "timestamp":  1795465826936
+                                                                                                            },
+                                                                                                            {
+                                                                                                                "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                "timestamp":  1795484900009
+                                                                                                            }
+                                                                                                        ],
+                             "4.4 Write property test untuk workflow Translation":  [
+                                                                                        {
+                                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                            "timestamp":  1795465826999
+                                                                                        },
+                                                                                        {
+                                                                                            "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                            "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                            "timestamp":  1795484900010
+                                                                                        }
+                                                                                    ],
+                             "4.5 Implementasi endpoint konten Learner":  [
+                                                                              {
+                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                  "timestamp":  1795465827061
+                                                                              }
+                                                                          ],
+                             "5.1 Implementasi CRUD admin untuk entitas induk":  [
+                                                                                     {
+                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                         "timestamp":  1795465827125
+                                                                                     }
+                                                                                 ],
+                             "5.2 Implementasi endpoint Translation admin":  [
+                                                                                 {
+                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                     "timestamp":  1795465827190
+                                                                                 }
+                                                                             ],
+                             "5.3 Implementasi katalog Misconception dan prasyarat Topic":  [
+                                                                                                {
+                                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                    "timestamp":  1795465827262
+                                                                                                }
+                                                                                            ],
+                             "6.1 Implementasi repository dan endpoint progress":  [
+                                                                                       {
+                                                                                           "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                           "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                           "timestamp":  1795465827322
+                                                                                       }
+                                                                                   ],
+                             "7. Checkpoint Phase 1":  [
+                                                           {
+                                                               "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                               "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                               "timestamp":  1795465827378
+                                                           }
+                                                       ],
+                             "8.1 Implementasi interface `Provider`, tipe error, dan adapter":  [
+                                                                                                    {
+                                                                                                        "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                        "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                        "timestamp":  1795465827432
+                                                                                                    }
+                                                                                                ],
+                             "8.2 Implementasi `BackoffDelay` dan `SelectProvider`":  [
+                                                                                          {
+                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                              "timestamp":  1795465827490
+                                                                                          }
+                                                                                      ],
+                             "8.3 Write property test untuk backoff dan pemilihan provider":  [
+                                                                                                  {
+                                                                                                      "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                      "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                      "timestamp":  1795465827544
+                                                                                                  }
+                                                                                              ],
+                             "9.1 Implementasi token bucket dan middleware HTTP":  [
+                                                                                       {
+                                                                                           "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                           "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                           "timestamp":  1795465827600
+                                                                                       }
+                                                                                   ],
+                             "9.2 Pasang rate limit pada endpoint auth":  [
+                                                                              {
+                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                  "timestamp":  1795465827649
+                                                                              }
+                                                                          ],
+                             "9.3 Write property test untuk token bucket":  [
+                                                                                {
+                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                    "timestamp":  1795465827703
+                                                                                }
+                                                                            ],
+                             "10.1 Implementasi `NextTaskState` sebagai fungsi murni":  [
+                                                                                            {
+                                                                                                "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                "timestamp":  1795465827761
+                                                                                            }
+                                                                                        ],
+                             "10.2 Write property test untuk siklus status AITask":  [
+                                                                                         {
+                                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                             "timestamp":  1795465827817
+                                                                                         }
+                                                                                     ],
+                             "10.3 Implementasi `Queue` AITask pada PostgreSQL dan versi in-memory":  [
+                                                                                                          {
+                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                              "timestamp":  1795465827869
+                                                                                                          }
+                                                                                                      ],
+                             "10.4 Write property test untuk antrean AITask":  [
+                                                                                   {
+                                                                                       "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                       "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                       "timestamp":  1795465827919
+                                                                                   }
+                                                                               ],
+                             "10.5 Implementasi Quota_Manager":  [
+                                                                     {
+                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                         "timestamp":  1795465827974
+                                                                     }
+                                                                 ],
+                             "10.6 Implementasi worker runner dan endpoint status AITask":  [
+                                                                                                {
+                                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                    "timestamp":  1795465828028
+                                                                                                }
+                                                                                            ],
+                             "11.1 Implementasi Prompt_Contract, registry, dan `seed-prompts`":  [
+                                                                                                     {
+                                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                         "timestamp":  1795465828082
+                                                                                                     }
+                                                                                                 ],
+                             "11.2 Implementasi guard anti prompt injection dan `Render`":  [
+                                                                                                {
+                                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                    "timestamp":  1795465828132
+                                                                                                }
+                                                                                            ],
+                             "11.4 Implementasi validator JSON Schema dan `ValidateEvaluatorOutput`":  [
+                                                                                                           {
+                                                                                                               "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                               "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                               "timestamp":  1795465828192
+                                                                                                           }
+                                                                                                       ],
+                             "11.6 Implementasi pipeline `Gateway.Run`":  [
+                                                                              {
+                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                  "timestamp":  1795465828243
+                                                                              }
+                                                                          ],
+                             "12.1 Implementasi `ScoreAnswer` dan pengambilan parameter":  [
+                                                                                               {
+                                                                                                   "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                   "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                   "timestamp":  1795465828315
+                                                                                               }
+                                                                                           ],
+                             "12.2 Write property test untuk batas dan determinisme skor":  [
+                                                                                                {
+                                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                    "timestamp":  1795465828388
+                                                                                                }
+                                                                                            ],
+                             "12.3 Write property test untuk monotonisitas skor":  [
+                                                                                       {
+                                                                                           "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                           "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                           "timestamp":  1795465828442
+                                                                                       }
+                                                                                   ],
+                             "12.4 Implementasi service Evaluator `answer_evaluation`":  [
+                                                                                             {
+                                                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                 "timestamp":  1795465828501
+                                                                                             }
+                                                                                         ],
+                             "13.1 Implementasi `ValidateCase` dan endpoint CRUD Golden_Set":  [
+                                                                                                   {
+                                                                                                       "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                       "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                       "timestamp":  1795465828553
+                                                                                                   }
+                                                                                               ],
+                             "13.3 Implementasi metrik, gate, regresi, baseline, dan Runner inti":  [
+                                                                                                        {
+                                                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                            "timestamp":  1795465828616
+                                                                                                        }
+                                                                                                    ],
+                             "13.5 Implementasi mode `recorded` dan `live`, perekaman response, dan endpoint run":  [
+                                                                                                                        {
+                                                                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                            "timestamp":  1795465828713
+                                                                                                                        }
+                                                                                                                    ],
+                             "13.7 Siapkan fixture Golden_Set v0":  [
+                                                                        {
+                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                            "timestamp":  1795465828767
+                                                                        }
+                                                                    ],
+                             "14.1 Implementasi endpoint konfigurasi provider AI":  [
+                                                                                        {
+                                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                            "timestamp":  1795465828822
+                                                                                        }
+                                                                                    ],
+                             "14.2 Implementasi endpoint Prompt_Contract dan gate aktivasi":  [
+                                                                                                  {
+                                                                                                      "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                      "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                      "timestamp":  1795465828879
+                                                                                                  }
+                                                                                              ],
+                             "14.4 Implementasi endpoint App_Settings dan view kuota AI":  [
+                                                                                               {
+                                                                                                   "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                   "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                   "timestamp":  1795465828943
+                                                                                               }
+                                                                                           ],
+                             "15. Checkpoint Phase 2":  [
+                                                            {
+                                                                "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                "timestamp":  1795465828997
+                                                            }
+                                                        ],
+                             "16.1 Implementasi pembuatan attempt dan pembacaan hasil":  [
+                                                                                             {
+                                                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                 "timestamp":  1795465829046
+                                                                                             }
+                                                                                         ],
+                             "16.2 Implementasi `ApplyEvaluationEvent` sebagai fungsi murni":  [
+                                                                                                   {
+                                                                                                       "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                       "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                       "timestamp":  1795465829098
+                                                                                                   }
+                                                                                               ],
+                             "16.3 Implementasi simpan jawaban dan submit":  [
+                                                                                 {
+                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                     "timestamp":  1795465829159
+                                                                                 }
+                                                                             ],
+                             "16.4 Implementasi Evaluation_Retry untuk jawaban assessment":  [
+                                                                                                 {
+                                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                     "timestamp":  1795465829221
+                                                                                                 }
+                                                                                             ],
+                             "16.5 Write property test untuk siklus Answer_Evaluation_Status":  [
+                                                                                                    {
+                                                                                                        "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                        "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                        "timestamp":  1795465829276
+                                                                                                    }
+                                                                                                ],
+                             "17.1 Implementasi handler AITask `answer_evaluation` beserta penyimpanan":  [
+                                                                                                              {
+                                                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                  "timestamp":  1795465829330
+                                                                                                              }
+                                                                                                          ],
+                             "17.2 Implementasi `ApplyMisconceptionSignals` pada paket `misconception`":  [
+                                                                                                              {
+                                                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                  "timestamp":  1795465829384
+                                                                                                              }
+                                                                                                          ],
+                             "17.3 Write property test untuk siklus Misconception":  [
+                                                                                         {
+                                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                             "timestamp":  1795465829439
+                                                                                         }
+                                                                                     ],
+                             "18.1 Implementasi `ComputeMastery` sebagai fungsi murni":  [
+                                                                                             {
+                                                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                 "timestamp":  1795465829495
+                                                                                             }
+                                                                                         ],
+                             "18.2 Write property test untuk karakterisasi MASTERED":  [
+                                                                                           {
+                                                                                               "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                               "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                               "timestamp":  1795465829550
+                                                                                           }
+                                                                                       ],
+                             "18.3 Write property test untuk determinisme Mastery":  [
+                                                                                         {
+                                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                             "timestamp":  1795465829614
+                                                                                         }
+                                                                                     ],
+                             "18.4 Implementasi `AggregateAssessment` dan `RecordAttempt`":  [
+                                                                                                 {
+                                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                     "timestamp":  1795465829677
+                                                                                                 }
+                                                                                             ],
+                             "18.5 Write property test untuk agregasi Attempt":  [
+                                                                                     {
+                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                         "timestamp":  1795465829730
+                                                                                     }
+                                                                                 ],
+                             "18.6 Hubungkan finalisasi attempt, `RecomputeMastery`, dan resolusi manual Admin":  [
+                                                                                                                      {
+                                                                                                                          "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                          "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                          "timestamp":  1795465829786
+                                                                                                                      }
+                                                                                                                  ],
+                             "18.8 Write property test untuk skor Attempt dari jawaban scored":  [
+                                                                                                     {
+                                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                         "timestamp":  1795465829843
+                                                                                                     }
+                                                                                                 ],
+                             "18.9 Implementasi job `UnscoreExpiredFailedAnswers`":  [
+                                                                                         {
+                                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                             "timestamp":  1795465829898
+                                                                                         }
+                                                                                     ],
+                             "19.1 Implementasi `Recommend` sebagai fungsi murni":  [
+                                                                                        {
+                                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                            "timestamp":  1795465829951
+                                                                                        }
+                                                                                    ],
+                             "19.2 Write property test untuk rule engine rekomendasi":  [
+                                                                                            {
+                                                                                                "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                "timestamp":  1795465830005
+                                                                                            }
+                                                                                        ],
+                             "19.3 Implementasi endpoint rekomendasi dan Roadmap Learner":  [
+                                                                                                {
+                                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                    "timestamp":  1795465830057
+                                                                                                }
+                                                                                            ],
+                             "20. Checkpoint Phase 3":  [
+                                                            {
+                                                                "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                "timestamp":  1795465830111
+                                                            }
+                                                        ],
+                             "21.1 Implementasi profil dan pembuatan sesi":  [
+                                                                                 {
+                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                     "timestamp":  1795465830171
+                                                                                 }
+                                                                             ],
+                             "21.2 Implementasi state machine sesi dan endpoint lifecycle":  [
+                                                                                                 {
+                                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                     "timestamp":  1795465830226
+                                                                                                 }
+                                                                                             ],
+                             "21.3 Write property test untuk transisi sesi":  [
+                                                                                  {
+                                                                                      "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                      "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                      "timestamp":  1795465830282
+                                                                                  }
+                                                                              ],
+                             "21.4 Write property test untuk pause dan resume":  [
+                                                                                     {
+                                                                                         "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                         "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                         "timestamp":  1795465830338
+                                                                                     }
+                                                                                 ],
+                             "21.5 Implementasi job terjadwal pada worker":  [
+                                                                                 {
+                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                     "timestamp":  1795465830392
+                                                                                 }
+                                                                             ],
+                             "22.1 Implementasi `AllocateFollowUp` dan `NextStep` sebagai fungsi murni":  [
+                                                                                                              {
+                                                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                  "timestamp":  1795465830451
+                                                                                                              }
+                                                                                                          ],
+                             "22.2 Write property test untuk alokasi follow-up":  [
+                                                                                      {
+                                                                                          "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                          "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                          "timestamp":  1795465830546
+                                                                                      }
+                                                                                  ],
+                             "22.3 Implementasi endpoint jawaban dan orchestrator `OnAnswerEvaluated`":  [
+                                                                                                             {
+                                                                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                 "timestamp":  1795465830608
+                                                                                                             }
+                                                                                                         ],
+                             "23.1 Implementasi `ScoreInterview` dan `AggregateInterviewTopic`":  [
+                                                                                                      {
+                                                                                                          "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                          "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                          "timestamp":  1795465830663
+                                                                                                      }
+                                                                                                  ],
+                             "23.2 Write property test untuk skor interview":  [
+                                                                                   {
+                                                                                       "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                       "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                       "timestamp":  1795465830722
+                                                                                   }
+                                                                               ],
+                             "23.3 Write property test untuk agregasi per Topic pada interview":  [
+                                                                                                      {
+                                                                                                          "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                          "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                          "timestamp":  1795465830778
+                                                                                                      }
+                                                                                                  ],
+                             "23.4 Implementasi finalisasi sesi dan handler `interview_evaluation`":  [
+                                                                                                          {
+                                                                                                              "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                              "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                              "timestamp":  1795465830834
+                                                                                                          }
+                                                                                                      ],
+                             "23.5 Implementasi report interview":  [
+                                                                        {
+                                                                            "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                            "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                            "timestamp":  1795465830897
+                                                                        }
+                                                                    ],
+                             "23.7 Implementasi Evaluation_Retry untuk jawaban interview":  [
+                                                                                                {
+                                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                    "timestamp":  1795465830948
+                                                                                                }
+                                                                                            ],
+                             "23.8 Write property test untuk skor Attempt interview dari jawaban scored":  [
+                                                                                                               {
+                                                                                                                   "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                                   "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                                   "timestamp":  1795465831003
+                                                                                                               }
+                                                                                                           ],
+                             "24.1 Tambahkan contract test untuk contoh JSON dan DTO":  [
+                                                                                            {
+                                                                                                "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                "timestamp":  1795465831053
+                                                                                            }
+                                                                                        ],
+                             "24.2 Konfigurasi pipeline CI dan gerbang property wajib":  [
+                                                                                             {
+                                                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                                                 "timestamp":  1795465831124
+                                                                                             }
+                                                                                         ],
+                             "25. Checkpoint Phase 4":  [
+                                                            {
+                                                                "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
+                                                                "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
+                                                                "timestamp":  1795465831181
+                                                            }
+                                                        ]
+                         }
 }

@@ -18,7 +18,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
 
 ### Phase 1: Fondasi, database, App_Settings, auth, konten, CMS, progress
 
-- [ ] 1. Fondasi proyek dan platform
+- [x] 1. Fondasi proyek dan platform
   - [x] 1.1 Inisialisasi module Go, struktur direktori, dan paket `platform`
     - Buat `go.mod`, `cmd/api`, `cmd/worker`, `cmd/migrate`, `internal/platform/{config,db,ids,clock}` sesuai struktur paket pada design.
     - `config`: baca env dan validasi (JWT key, DB URL, CORS origins, secret provider). Secret hanya dari environment.
@@ -52,7 +52,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Paket `platform/db`, `PageCursor` pada penyimpanan in-memory.
     - **Validates: Requirements 9.5, 9.7**
 
-  - [~] 1.6 Implementasi service App_Settings di `platform/settings`
+  - [x] 1.6 Implementasi service App_Settings di `platform/settings`
     - Antarmuka `Settings{Snapshot, Update}` dengan penyimpanan PostgreSQL (`app_settings`) dan in-memory. `Snapshot(keys...)` membaca nilai pada satu titik waktu (cache 30 detik) dan melaporkan `all_initial`.
     - `Update(actor, key, value)`: validasi terhadap `value_schema` (tipe dan rentang) dan aturan lintas kunci (`scoring.clamp_min < scoring.clamp_max`, `interview.min_topics_per_session <= interview.max_topics_per_session`, `scoring.critical_score_cap` dalam rentang clamp, kuota `null` atau bilangan bulat `>= 1`). Nilai valid disimpan dengan `updated_by` terisi dan `is_initial_value = false`. Nilai tidak valid menghasilkan `validation_error` tanpa mengubah baris. Kunci yang belum ada menghasilkan `not_found` (kunci baru tidak dapat dibuat lewat API, DA-19).
     - Snapshot parameter `P` dipakai fungsi murni sebagai argumen, dan nilai yang dipakai dicatat pada hasil (`params_snapshot`, `evidence.parameters`).
@@ -110,19 +110,19 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Evaluasi dan Golden_Set: `evaluation_status` di luar nilai valid ditolak, `answer_text` tidak dapat diubah setelah submit, status `failed` tanpa `evaluation_failed_at` ditolak, `run_mode` di luar `recorded`/`live` ditolak, `golden_recordings` duplikat ditolak.
     - _Requirements: 2.5, 3.3, 3.8, 4.4, 6.5, 15.3, 15.11, 17.3, 24.1, 24.2, 24.3, 25.1, 25.4_
 
-- [ ] 3. Auth, invite, dan JWT
-  - [~] 3.1 Implementasi primitif kriptografi dan kebijakan password di `internal/auth`
+- [x] 3. Auth, invite, dan JWT
+  - [x] 3.1 Implementasi primitif kriptografi dan kebijakan password di `internal/auth`
     - `argon2id` (`m=65536`, `t=3`, `p=2`, salt 16 byte, key 32 byte) sebagai PHC string dengan `rehash on login`.
     - Generator Invite_Code dan Refresh_Token (32 byte `crypto/rand`, base64url) dan hash SHA-256.
     - Kebijakan password (panjang minimum dan aturan validasi) dari konfigurasi.
     - _Requirements: 7.4, 7.5, 18.2_
 
-  - [~] 3.2 Implementasi penerbitan dan validasi Access_Token serta middleware role
+  - [x] 3.2 Implementasi penerbitan dan validasi Access_Token serta middleware role
     - JWT `HS256` dengan klaim `sub`, `role`, `iat`, `exp`, `jti`. Masa berlaku dibaca dari App_Settings lewat `Settings.Snapshot` (`auth.access_token_ttl_seconds` Initial_Value 900, `auth.refresh_token_ttl_seconds` Initial_Value 2.592.000). Perubahan TTL hanya berlaku untuk token yang diterbitkan setelah perubahan.
     - Middleware autentikasi (`unauthenticated` 401) dan `RequireRole` (`forbidden` 403). Endpoint Admin oleh role `user` mengembalikan 403.
     - _Requirements: 8.1, 8.2, 8.8, 8.9, 10.10_
 
-  - [~] 3.3 Implementasi invitation dan register atomik
+  - [x] 3.3 Implementasi invitation dan register atomik
     - Predikat `InviteUsable` (belum terpakai, belum dicabut, belum kedaluwarsa, email cocok tanpa membedakan huruf besar-kecil).
     - `POST /auth/register` dalam satu transaksi: `SELECT ... FOR UPDATE` undangan, insert user, tandai `used_at` dan `used_by`. Kegagalan memberi `invalid_invite_code` (403) atau `email_already_registered` (409).
     - `POST`, `GET`, `DELETE /admin/invitations`: Invite_Code asli hanya dikembalikan satu kali saat pembuatan, pencabutan hanya untuk undangan belum terpakai.
@@ -134,20 +134,20 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Paket `auth`, fungsi `InviteUsable`, predikat referensi.
     - **Validates: Requirements 7.8, 7.9**
 
-  - [~] 3.5 Implementasi login, rotasi refresh tanpa grace window, logout, dan endpoint `/me`
+  - [x] 3.5 Implementasi login, rotasi refresh tanpa grace window, logout, dan endpoint `/me`
     - `POST /auth/login` dengan pesan `invalid_credentials` yang sama untuk email tidak terdaftar dan password salah, isi `last_login_at`.
     - `RotateRefresh` dan `RevokeFamily` sebagai fungsi murni di `internal/evaluation/tokenfamily.go` (waktu dan hash token baru sebagai argumen, Requirement 26.4). Tidak ada grace window: token yang sudah `revoked_at` terisi (termasuk karena rotasi sah) selalu dianggap reuse, berapa pun selisih waktunya. Reuse me-revoke seluruh Token_Family dan menghasilkan `refresh_token_reuse_detected`. Token kedaluwarsa atau tidak dikenal menghasilkan `invalid_refresh_token`. Setiap family memiliki paling banyak satu token aktif.
     - `POST /auth/refresh` membungkus fungsi tersebut dalam satu transaksi dengan `SELECT ... FOR UPDATE` pada baris token (token lama `revoked_at` dan `replaced_by`, token baru dalam family yang sama, TTL dari App_Settings).
     - `POST /auth/logout` me-revoke family. `GET` dan `PATCH /me`, `POST /me/password` (revoke semua Refresh_Token).
     - _Requirements: 7.11, 8.3, 8.4, 8.5, 8.6, 8.7, 8.11, 10.1, 18.3, 26.4_
 
-  - [~] 3.6 Write property test untuk rotasi Refresh_Token
+  - [x] 3.6 Write property test untuk rotasi Refresh_Token
     - **Property 5: Rotasi Refresh_Token menjaga satu token aktif per family dan mendeteksi reuse**
     - **Kategori:** Wajib (area 8: invariant autentikasi token). Nama test `TestPropW5_<Judul>`.
     - Paket `evaluation`, `RotateRefresh` dan `RevokeFamily` pada model Token_Family in-memory dengan operasi acak (refresh dengan token aktif, token yang sudah dirotasi, token tidak dikenal, logout, user dinonaktifkan, password diganti, dan peristiwa waktu). Pemakaian ulang pada selisih waktu nol atau lebih selalu reuse.
     - **Validates: Requirements 8.3, 8.4, 8.5, 8.6, 8.7, 8.11, 26.2**
 
-  - [~] 3.7 Implementasi admin users dan perintah `bootstrap-admin`
+  - [x] 3.7 Implementasi admin users dan perintah `bootstrap-admin`
     - `GET`, `PATCH /admin/users` (ubah `is_active` dan `role`). Menonaktifkan user me-revoke seluruh Refresh_Token milik user lewat `RevokeFamily`.
     - `cmd/migrate bootstrap-admin --email=...` membaca `BOOTSTRAP_ADMIN_PASSWORD` dari environment dan hanya membuat admin bila belum ada.
     - _Requirements: 8.7, 10.5_
@@ -164,7 +164,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Log request tidak memuat hash, password, atau token. Endpoint Admin oleh `user` mengembalikan `forbidden`.
     - _Requirements: 7.7, 7.10, 8.4, 8.11, 10.10, 18.1, 18.4_
 
-  - [~] 3.10 Tulis contoh klien single-flight refresh untuk Astro dan Svelte
+  - [x] 3.10 Tulis contoh klien single-flight refresh untuk Astro dan Svelte
     - Direktori `examples/web-client`: modul `refreshSingleFlight.ts` yang menjamin paling banyak satu request `refresh` berjalan per Refresh_Token pada seluruh permintaan paralel dan seluruh tab. Dalam tab: satu promise bersama. Antar tab: `navigator.locks` dengan `BroadcastChannel` untuk menyebarkan pasangan token baru, dan mutex `localStorage` sebagai cadangan. Setelah memegang kunci, klien membaca ulang token tersimpan dan memakai pasangan yang sudah dirotasi tab lain tanpa mengirim `refresh` kedua.
     - `apiClient.ts`: fetch wrapper yang pada 401 `unauthenticated` menunggu hasil single-flight lalu mengulang request satu kali. `refresh_token_reuse_detected` dan `invalid_refresh_token` membersihkan token dan mengarahkan ke login.
     - Contoh integrasi: Svelte store `auth` dan middleware Astro. Lokasi penyimpanan token dibuat sebagai antarmuka `TokenStorage` karena belum diputuskan (DA-20) dan tidak memengaruhi kontrak server.
@@ -175,7 +175,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 8.12_
 
 - [ ] 4. Konten bilingual dan workflow Translation
-  - [~] 4.1 Implementasi resolusi Locale dan filter Published_Translation sebagai fungsi murni
+  - [x] 4.1 Implementasi resolusi Locale dan filter Published_Translation sebagai fungsi murni
     - `internal/evaluation/locale.go`: `ParseAcceptLanguage`, `ResolveLocale` (urutan query, `Accept-Language`, preferensi user, Default_Locale, pemetaan `id-ID` ke `id`), `FilterPublished`, `GetDetail` (`translation_not_available` dengan `available_locales` terurut).
     - _Requirements: 5.1, 5.2, 5.3, 5.9_
 
@@ -184,12 +184,12 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Kategori:** Opsional (di luar delapan area inti). Nama test `TestPropO1_<Judul>`.
     - **Validates: Requirements 5.1, 5.2, 5.3**
 
-  - [~] 4.3 Implementasi workflow Translation sebagai fungsi murni dan service
+  - [x] 4.3 Implementasi workflow Translation sebagai fungsi murni dan service
     - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`→`in_review`, `in_review`→`draft`, `in_review`→`published`, `published`→`archived`, `archived`→`draft`), `invalid_status_transition` dan `version_conflict` (409).
     - Translation baru berstatus `draft` dengan `version` 1. Ubah teks menaikkan `version` lewat `UPDATE ... WHERE version = $2`. Edit pada `published` mengembalikan ke `draft` dan mengosongkan `published_at`. Transisi ke `published` mensyaratkan `reviewer_id` ber-role `admin` dan mengisi `reviewed_at`, `published_at`.
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 26.4_
 
-  - [~] 4.4 Write property test untuk workflow Translation
+  - [x] 4.4 Write property test untuk workflow Translation
     - **Property 3: Workflow Translation mengikuti state machine dan versioning**
     - **Kategori:** Wajib (area 7: aturan status dan lifecycle, Translation). Nama test `TestPropW3_<Judul>`.
     - **Validates: Requirements 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 26.2**

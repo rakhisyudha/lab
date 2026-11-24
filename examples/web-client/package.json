@@ -1,0 +1,10 @@
+{
+  "name": "backendlab-single-flight-example",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}
