@@ -84,7 +84,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Tidak ada tabel `ai_quota_settings`. Kuota AI disimpan sebagai kunci `ai.quota.{scope}.{period}.{metric}` pada `app_settings`.
     - _Requirements: 15.3, 15.4, 15.11, 16.1, 16.2, 16.5, 16.17, 23.5, 24.1, 24.3_
 
-  - [~] 2.4 Tulis migrasi `0005_assessment` dan `0006_interview`
+  - [x] 2.4 Tulis migrasi `0005_assessment` dan `0006_interview`
     - `assessment_attempts` dengan `status` `in_progress`, `submitted`, `scored`, `unscored` (constraint `scored` memerlukan `score_pct` dan `scored_at`, `unscored` tanpa keduanya, `resolved_at` terisi jika dan hanya jika `scored` atau `unscored`).
     - `assessment_answers` dengan `evaluation_status` (`pending`, `scored`, `failed`, `unscored`, null selama draf), `evaluation_retry_count`, `evaluation_failed_at` (kegagalan pertama, tidak di-reset retry, DA-17), `evaluation_prompt_contract_id`, constraint `failed` memerlukan `evaluation_failed_at`, trigger `answer_text_frozen_after_submit`, dan partial index `failed` serta `pending`/`failed`.
     - `interview_profiles`, `interview_sessions` (kolom lengkap termasuk `prompt_contract_versions`, `retention_until`, `deleted_at`), `interview_messages` (unique `(interview_session_id, sequence)`) dengan kolom evaluasi yang sama pada pesan `kind = answer` (`evaluation_status`, `evaluation_retry_count`, `evaluation_failed_at`, `evaluation_prompt_contract_id`) dan constraint `kind = 'answer'` jika dan hanya jika `evaluation_status` terisi.
