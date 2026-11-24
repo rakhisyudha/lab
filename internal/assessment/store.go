@@ -95,17 +95,17 @@ func (s *Store) CreateAttempt(ctx context.Context, userID, topicID uuid.UUID, lo
 
 // AttemptRow adalah ringkasan satu attempt.
 type AttemptRow struct {
-	ID          uuid.UUID
-	UserID      uuid.UUID
-	TopicID     uuid.UUID
-	Locale      string
-	Status      string
-	ScorePct    *float64
-	HasApp      bool
-	SubmittedAt *time.Time
-	ScoredAt    *time.Time
-	ResolvedAt  *time.Time
-	CreatedAt   time.Time
+	ID          uuid.UUID  `json:"id"`
+	UserID      uuid.UUID  `json:"user_id"`
+	TopicID     uuid.UUID  `json:"topic_id"`
+	Locale      string     `json:"locale"`
+	Status      string     `json:"status"`
+	ScorePct    *float64   `json:"score_pct"`
+	HasApp      bool       `json:"has_application_question"`
+	SubmittedAt *time.Time `json:"submitted_at"`
+	ScoredAt    *time.Time `json:"scored_at"`
+	ResolvedAt  *time.Time `json:"resolved_at"`
+	CreatedAt   time.Time  `json:"created_at"`
 }
 
 func scanAttempt(row interface{ Scan(...any) error }) (AttemptRow, error) {
@@ -154,16 +154,16 @@ func (s *Store) FindAttemptForUpdate(ctx context.Context, tx pgx.Tx, id uuid.UUI
 
 // AnswerRow adalah satu jawaban assessment.
 type AnswerRow struct {
-	ID               uuid.UUID
-	AttemptID        uuid.UUID
-	QuestionID       uuid.UUID
-	Position         int
-	AnswerText       *string
-	IsBlank          bool
-	EvalStatus       *string
-	RetryCount       int
-	FailedAt         *time.Time
-	PromptContractID *uuid.UUID
+	ID               uuid.UUID  `json:"id"`
+	AttemptID        uuid.UUID  `json:"attempt_id"`
+	QuestionID       uuid.UUID  `json:"question_id"`
+	Position         int        `json:"position"`
+	AnswerText       *string    `json:"answer_text"`
+	IsBlank          bool       `json:"is_blank"`
+	EvalStatus       *string    `json:"evaluation_status"`
+	RetryCount       int        `json:"evaluation_retry_count"`
+	FailedAt         *time.Time `json:"evaluation_failed_at"`
+	PromptContractID *uuid.UUID `json:"evaluation_prompt_contract_id"`
 }
 
 const answerColumns = `id, attempt_id, question_id, position, answer_text, is_blank,

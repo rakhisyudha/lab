@@ -30,6 +30,7 @@ import (
 	"github.com/rakhisyudha/lab/internal/content"
 	"github.com/rakhisyudha/lab/internal/evaluation"
 	"github.com/rakhisyudha/lab/internal/golden"
+	"github.com/rakhisyudha/lab/internal/interview"
 	"github.com/rakhisyudha/lab/internal/platform/clock"
 	"github.com/rakhisyudha/lab/internal/platform/config"
 	"github.com/rakhisyudha/lab/internal/platform/db"
@@ -113,6 +114,30 @@ func run() error {
 	assessment.NewHandler(assessmentSvc, assessmentStore).RegisterRoutes(api, middleware.Authenticate())
 	progressHandler.RegisterAdminRoutes(adminGroup, masterySvc)
 	recommendation.NewHandler(pool, settingsSvc).RegisterRoutes(meGroup)
+
+	// Versi Prompt_Contract aktif di-pin pada setiap sesi interview.
+	contractVersions := map[string]int{}
+	contractRows, err := pool.Query(ctx, `SELECT task_type, version FROM prompt_contracts WHERE status='active'`)
+	if err != nil {
+		return err
+	}
+	for contractRows.Next() {
+		var taskType string
+		var version int
+		if err := contractRows.Scan(&taskType, &version); err != nil {
+			contractRows.Close()
+			return err
+		}
+		contractVersions[taskType] = version
+	}
+	contractRows.Close()
+
+	interviewStore := interview.NewStore(pool)
+	interviewFinalizer := interview.NewFinalizer(interviewStore, postgresQueue, masterySvc, c)
+	interviewEvalSvc := interview.NewEvaluationService(interviewStore, postgresQueue, c, interviewFinalizer)
+	interview.NewHandler(interview.NewService(interviewStore, postgresQueue,
+		quota.NewManager(pool, settingsSvc, c), settingsSvc, c, contractVersions), interviewStore).
+		RegisterRoutes(api, middleware.Authenticate(), interviewEvalSvc, interviewFinalizer)
 	taskHandler.RegisterRoutes(api, adminGroup, middleware.Authenticate())
 
 	goldenStore := golden.NewStore(pool)

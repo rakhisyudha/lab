@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: backendlab_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/backendlab_test?sslmode=disable
+      TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/backendlab_test?sslmode=disable
+      JWT_SIGNING_KEY: ci-only-signing-key-must-be-at-least-32-bytes
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Gate property test wajib, vet, gofmt, unit test
+        run: bash scripts/check-properties.sh
+      - name: Property test wajib (100 checks)
+        run: go test -race -rapid.checks=100 -run '^TestPropW' ./...
+      - name: Verifikasi migrasi (up, down, up, diff snapshot)
+        run: |
+          go run ./cmd/migrate down --all
+          go run ./cmd/migrate up
+          bash scripts/verify-migrations.sh

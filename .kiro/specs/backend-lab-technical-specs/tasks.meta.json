@@ -946,6 +946,11 @@
                                                                                      "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                      "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                      "timestamp":  1795465830171
+                                                                                 },
+                                                                                 {
+                                                                                     "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                     "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                     "timestamp":  1795488000000
                                                                                  }
                                                                              ],
                              "21.2 Implementasi state machine sesi dan endpoint lifecycle":  [
@@ -953,6 +958,11 @@
                                                                                                      "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                      "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                      "timestamp":  1795465830226
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                     "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                     "timestamp":  1795488000001
                                                                                                  }
                                                                                              ],
                              "21.3 Write property test untuk transisi sesi":  [
@@ -960,6 +970,11 @@
                                                                                       "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                       "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                       "timestamp":  1795465830282
+                                                                                  },
+                                                                                  {
+                                                                                      "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                      "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                      "timestamp":  1795488000002
                                                                                   }
                                                                               ],
                              "21.4 Write property test untuk pause dan resume":  [
@@ -967,6 +982,11 @@
                                                                                          "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                          "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                          "timestamp":  1795465830338
+                                                                                     },
+                                                                                     {
+                                                                                         "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                         "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                         "timestamp":  1795488000003
                                                                                      }
                                                                                  ],
                              "21.5 Implementasi job terjadwal pada worker":  [
@@ -974,6 +994,11 @@
                                                                                      "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                      "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                      "timestamp":  1795465830392
+                                                                                 },
+                                                                                 {
+                                                                                     "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                     "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                     "timestamp":  1795488000004
                                                                                  }
                                                                              ],
                              "22.1 Implementasi `AllocateFollowUp` dan `NextStep` sebagai fungsi murni":  [
@@ -981,6 +1006,11 @@
                                                                                                                   "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                                   "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                                   "timestamp":  1795465830451
+                                                                                                              },
+                                                                                                              {
+                                                                                                                  "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                  "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                  "timestamp":  1795488000005
                                                                                                               }
                                                                                                           ],
                              "22.2 Write property test untuk alokasi follow-up":  [
@@ -988,6 +1018,11 @@
                                                                                           "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                           "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                           "timestamp":  1795465830546
+                                                                                      },
+                                                                                      {
+                                                                                          "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                          "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                          "timestamp":  1795488000006
                                                                                       }
                                                                                   ],
                              "22.3 Implementasi endpoint jawaban dan orchestrator `OnAnswerEvaluated`":  [
@@ -995,6 +1030,11 @@
                                                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                                  "timestamp":  1795465830608
+                                                                                                             },
+                                                                                                             {
+                                                                                                                 "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                 "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                 "timestamp":  1795488000007
                                                                                                              }
                                                                                                          ],
                              "23.1 Implementasi `ScoreInterview` dan `AggregateInterviewTopic`":  [
@@ -1002,6 +1042,11 @@
                                                                                                           "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                           "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                           "timestamp":  1795465830663
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                          "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                          "timestamp":  1795488000008
                                                                                                       }
                                                                                                   ],
                              "23.2 Write property test untuk skor interview":  [
@@ -1009,6 +1054,11 @@
                                                                                        "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                        "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                        "timestamp":  1795465830722
+                                                                                   },
+                                                                                   {
+                                                                                       "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                       "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                       "timestamp":  1795488000009
                                                                                    }
                                                                                ],
                              "23.3 Write property test untuk agregasi per Topic pada interview":  [
@@ -1016,6 +1066,11 @@
                                                                                                           "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                           "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                           "timestamp":  1795465830778
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                          "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                          "timestamp":  1795488000010
                                                                                                       }
                                                                                                   ],
                              "23.4 Implementasi finalisasi sesi dan handler `interview_evaluation`":  [
@@ -1023,6 +1078,11 @@
                                                                                                               "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                               "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                               "timestamp":  1795465830834
+                                                                                                          },
+                                                                                                          {
+                                                                                                              "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                              "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                              "timestamp":  1795488000011
                                                                                                           }
                                                                                                       ],
                              "23.5 Implementasi report interview":  [
@@ -1030,6 +1090,11 @@
                                                                             "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                             "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                             "timestamp":  1795465830897
+                                                                        },
+                                                                        {
+                                                                            "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                            "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                            "timestamp":  1795488000012
                                                                         }
                                                                     ],
                              "23.7 Implementasi Evaluation_Retry untuk jawaban interview":  [
@@ -1037,6 +1102,11 @@
                                                                                                     "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                     "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                     "timestamp":  1795465830948
+                                                                                                },
+                                                                                                {
+                                                                                                    "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                    "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                    "timestamp":  1795488000013
                                                                                                 }
                                                                                             ],
                              "23.8 Write property test untuk skor Attempt interview dari jawaban scored":  [
@@ -1044,6 +1114,11 @@
                                                                                                                    "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                                    "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                                    "timestamp":  1795465831003
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                                   "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                                   "timestamp":  1795488000014
                                                                                                                }
                                                                                                            ],
                              "24.1 Tambahkan contract test untuk contoh JSON dan DTO":  [
@@ -1051,6 +1126,11 @@
                                                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                 "timestamp":  1795465831053
+                                                                                            },
+                                                                                            {
+                                                                                                "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                "timestamp":  1795488000015
                                                                                             }
                                                                                         ],
                              "24.2 Konfigurasi pipeline CI dan gerbang property wajib":  [
@@ -1058,6 +1138,11 @@
                                                                                                  "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                                                  "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                                                  "timestamp":  1795465831124
+                                                                                             },
+                                                                                             {
+                                                                                                 "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                                                 "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                                                 "timestamp":  1795488000016
                                                                                              }
                                                                                          ],
                              "25. Checkpoint Phase 4":  [
@@ -1065,6 +1150,11 @@
                                                                 "executionId":  "a191ef6a-9490-4b70-988e-17c22e626182",
                                                                 "chatSessionId":  "sess_953c152f-52b2-4060-9cd7-bfaf47ef1fbc",
                                                                 "timestamp":  1795465831181
+                                                            },
+                                                            {
+                                                                "executionId":  "f68ad598-72e1-47e8-b47c-cac9c4b8783c",
+                                                                "chatSessionId":  "sess_df4c7d17effe2AV16D3BJdbUm4",
+                                                                "timestamp":  1795488000017
                                                             }
                                                         ]
                          }

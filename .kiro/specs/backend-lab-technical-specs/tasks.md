@@ -185,7 +185,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Validates: Requirements 5.1, 5.2, 5.3**
 
   - [x] 4.3 Implementasi workflow Translation sebagai fungsi murni dan service
-    - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`in_review`, `in_review`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`draft`, `in_review`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`published`, `published`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`archived`, `archived`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`draft`), `invalid_status_transition` dan `version_conflict` (409).
+    - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`in_review`, `in_review`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`draft`, `in_review`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`published`, `published`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`archived`, `archived`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`draft`), `invalid_status_transition` dan `version_conflict` (409).
     - Translation baru berstatus `draft` dengan `version` 1. Ubah teks menaikkan `version` lewat `UPDATE ... WHERE version = $2`. Edit pada `published` mengembalikan ke `draft` dan mengosongkan `published_at`. Transisi ke `published` mensyaratkan `reviewer_id` ber-role `admin` dan mengisi `reviewed_at`, `published_at`.
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 26.4_
 
@@ -278,7 +278,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
 
 - [ ] 10. Task service
   - [x] 10.1 Implementasi `NextTaskState` sebagai fungsi murni
-    - `internal/evaluation/tasklife.go`: transisi hanya `queued`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`processing` (`run_after <= now`), `processing`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`completed`, `processing`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`queued` (`requeue` dengan `count_attempt`), `processing`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`failed`, dan `lock_expired` (kembali ke `queued` bila `attempts < max_attempts`, selain itu `failed` dengan `ai_provider_unavailable`). `completed` dan `failed` terminal, transisi lain menghasilkan `invalid_task_transition`.
+    - `internal/evaluation/tasklife.go`: transisi hanya `queued`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`processing` (`run_after <= now`), `processing`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`completed`, `processing`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`queued` (`requeue` dengan `count_attempt`), `processing`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢`failed`, dan `lock_expired` (kembali ke `queued` bila `attempts < max_attempts`, selain itu `failed` dengan `ai_provider_unavailable`). `completed` dan `failed` terminal, transisi lain menghasilkan `invalid_task_transition`.
     - Invarian: `status = processing` jika dan hanya jika `locked_at` terisi, `completed` memiliki `result`, `failed` memiliki `error_code`, `0 <= attempts <= max_attempts`.
     - _Requirements: 16.5, 16.10, 16.13, 26.4_
 
@@ -578,29 +578,29 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
 ### Phase 4: Interview engine
 
 - [ ] 21. Lifecycle Interview_Session
-  - [~] 21.1 Implementasi profil dan pembuatan sesi
+  - [x] 21.1 Implementasi profil dan pembuatan sesi
     - `GET /interview-profiles`. `POST /interviews`: salin profil ke `configuration` (snapshot termasuk bobot), simpan `prompt_contract_versions` aktif untuk setiap Task_Type interview, pilih pertanyaan utama dari bank Question `published` (`purpose` `interview` atau `both`, boleh lintas Topic), isi `locale` dan `retry_of_session_id` bila ada. Sesi baru tanpa batas jumlah dan jeda.
     - Jumlah Topic harus berada di antara `interview.min_topics_per_session` dan `interview.max_topics_per_session` (App_Settings, Initial_Value 1 dan 5, batas sementara D-11). Di luar rentang menghasilkan 400 `validation_error`.
     - _Requirements: 11.1, 11.9, 15.6, 21.1, 21.2, 21.10_
 
-  - [~] 21.2 Implementasi state machine sesi dan endpoint lifecycle
+  - [x] 21.2 Implementasi state machine sesi dan endpoint lifecycle
     - `Transition` murni (tabel transisi valid), `start`, `pause` (`paused_at` dan `expires_at` = +7 hari, state dipertahankan), `resume` (409 `session_expired` bila lewat, perubahan ke `ABANDONED` harus di-commit sebelum error dikembalikan), `finish` (202, syarat sedikitnya satu pertanyaan utama terjawab, selain itu 409 `conflict`; mengisi `state.finish_requested` bila `phase` masih `evaluating` atau `generating_followup`), `abandon`, `GET /interviews`, `GET /interviews/{id}`, `GET /interviews/{id}/messages` (cursor).
     - Saat sesi menjadi `ABANDONED`, jawaban `pending` atau `failed` menjadi `unscored` lewat `ApplyEvaluationEvent(session_closed)` (DA-21).
     - Transisi tidak valid menghasilkan 409 `invalid_session_transition`. Jawaban saat status bukan `IN_PROGRESS` menghasilkan `session_not_active`. Hanya pemilik yang dapat mengakses, sesi `deleted_at` terisi dikecualikan.
     - _Requirements: 10.3, 11.2, 11.3, 11.4, 11.6, 11.7, 11.8, 11.10, 11.11, 11.14, 26.4_
 
-  - [~] 21.3 Write property test untuk transisi sesi
+  - [x] 21.3 Write property test untuk transisi sesi
     - **Property 8: Transisi status Interview_Session hanya yang valid**
     - **Kategori:** Wajib (area 7: aturan status dan lifecycle, Interview_Session). Nama test `TestPropW8_<Judul>`.
     - **Validates: Requirements 11.2, 11.3, 11.4, 11.11, 26.2**
 
-  - [~] 21.4 Write property test untuk pause dan resume
+  - [x] 21.4 Write property test untuk pause dan resume
     - **Property 9: Pause dan resume menjaga state dan batas 7 hari**
     - **Kategori:** Wajib (area 7: aturan status dan lifecycle, Interview_Session). Nama test `TestPropW9_<Judul>`.
     - Memakai Clock palsu. Mencakup `AbandonExpiredSessions`.
     - **Validates: Requirements 11.6, 11.7, 11.8, 26.2**
 
-  - [~] 21.5 Implementasi job terjadwal pada worker
+  - [x] 21.5 Implementasi job terjadwal pada worker
     - `AbandonExpiredSessions` (sesi `PAUSED` dengan `expires_at` terlewati menjadi `ABANDONED`, isi `abandoned_at`, dan jawaban `pending` atau `failed` menjadi `unscored` lewat `session_closed`) dan `PurgeRetention` (isi `deleted_at` setelah `retention_until`). Transcript disimpan tanpa batas bila `retention_until` null.
     - _Requirements: 11.8, 11.12, 11.13_
 
@@ -609,18 +609,18 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 11.8, 11.12, 11.14_
 
 - [ ] 22. Follow-up allocation dan alur jawaban
-  - [~] 22.1 Implementasi `AllocateFollowUp` dan `NextStep` sebagai fungsi murni
+  - [x] 22.1 Implementasi `AllocateFollowUp` dan `NextStep` sebagai fungsi murni
     - `internal/evaluation/interview.go`: `total_cap` mengikat, follow-up per pertanyaan tidak melebihi `max_followups_per_question`, depth tidak melebihi `max_depth`, anggaran pertanyaan utama yang tersisa tidak dihabiskan follow-up. Keputusan hanya dari skor, Concept `required` yang terlewat, Misconception terdeteksi, dan state, bukan dari teks AI.
     - Jawaban yang evaluasinya `failed` tidak menghasilkan follow-up, sesi berlanjut ke pertanyaan utama berikutnya.
     - _Requirements: 21.3, 21.4, 21.5, 21.12, 26.4_
 
-  - [~] 22.2 Write property test untuk alokasi follow-up
+  - [x] 22.2 Write property test untuk alokasi follow-up
     - **Property 17: Alokasi follow-up tidak melanggar batas interview dan tidak menghabiskan pertanyaan utama**
     - **Kategori:** Wajib (area 3: alokasi follow-up). Nama test `TestPropW17_<Judul>`.
     - Simulasi sesi penuh dengan kegagalan evaluasi dan kegagalan pembuatan follow-up.
     - **Validates: Requirements 21.2, 21.3, 21.4, 21.5, 26.2**
 
-  - [~] 22.3 Implementasi endpoint jawaban dan orchestrator `OnAnswerEvaluated`
+  - [x] 22.3 Implementasi endpoint jawaban dan orchestrator `OnAnswerEvaluated`
     - `POST /interviews/{id}/answers` (202): kunci sesi, validasi `phase` dan `message_id` (`stale_question`), tolak jawaban kosong atau hanya spasi (`validation_error`), simpan pesan `answer` dengan `evaluation_status = pending` dan `evaluation_prompt_contract_id` dari versi tersimpan pada sesi, cek kuota dan batas antrean, enqueue `answer_evaluation` priority 1 dalam satu transaksi.
     - Handler hasil evaluasi: simpan `answer_evaluations`, panggil `AllocateFollowUp`, enqueue `interview_followup` (kegagalan membuat follow-up berdegradasi ke pertanyaan utama berikutnya), tulis pesan `follow_up` atau pertanyaan utama berikutnya, perbarui `session_state`. Evaluasi jawaban yang `failed` menjadikan jawaban `failed` (atau `unscored` bila retry habis) dan sesi berlanjut ke pertanyaan utama berikutnya tanpa follow-up. Sesi `PAUSED` menyimpan hasil tanpa mengubah status. Sesi `COMPLETED` hanya menambah skor Attempt tanpa follow-up. Sesi `ABANDONED` membuang hasil (`session_closed`).
     - Saat pertanyaan utama habis atau `finish` diminta, panggil interface `SessionFinalizer` yang diimplementasikan pada tugas 23.4.
@@ -631,30 +631,30 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 11.11, 16.4, 21.4, 21.12_
 
 - [ ] 23. Interview evaluation dan report
-  - [~] 23.1 Implementasi `ScoreInterview` dan `AggregateInterviewTopic`
+  - [x] 23.1 Implementasi `ScoreInterview` dan `AggregateInterviewTopic`
     - `ScoreInterview`: `overall_score = round2(sum(skor_i * bobot_i) / 100)` atas lima dimensi (Technical Accuracy, Conceptual Understanding, Reasoning, Practical Application, Communication) dengan skor di-clamp 0 sampai 100 dan bobot dari snapshot `configuration.weights`. Dimensi hilang menghasilkan error.
     - `AggregateInterviewTopic`: rata-rata berbobot skor jawaban `scored` per Topic (pertanyaan utama dan follow-up digabung per pertanyaan utama), `has_application_question` per Topic, dan hasil `null` bila seluruh jawaban Topic tidak `scored`. Jawaban `unscored` dan `failed` tidak memengaruhi skor rantai yang memiliki jawaban `scored` lain.
     - Keduanya fungsi murni (Requirement 26.4).
     - _Requirements: 21.6, 21.7, 21.8, 21.11, 26.4_
 
-  - [~] 23.2 Write property test untuk skor interview
+  - [x] 23.2 Write property test untuk skor interview
     - **Property 18: Skor interview adalah rata-rata berbobot yang di-clamp**
     - **Kategori:** Wajib (area 4: skor interview). Nama test `TestPropW18_<Judul>`.
     - **Validates: Requirements 21.6, 21.7, 26.2**
 
-  - [~] 23.3 Write property test untuk agregasi per Topic pada interview
+  - [x] 23.3 Write property test untuk agregasi per Topic pada interview
     - **Property 13: Agregasi Attempt berada di antara skor terkecil dan terbesar yang disertakan**
     - **Kategori:** Wajib (area 1: scoring free-text). Nama test `TestPropW13_<Judul>` (bagian interview).
     - Bagian `AggregateInterviewTopic` (hanya pertanyaan Topic tersebut yang disertakan).
     - **Validates: Requirements 20.10, 21.8, 26.2**
 
-  - [~] 23.4 Implementasi finalisasi sesi dan handler `interview_evaluation`
+  - [x] 23.4 Implementasi finalisasi sesi dan handler `interview_evaluation`
     - `SessionFinalizer`: ubah status `COMPLETED` tanpa menunggu `interview_evaluation` maupun retry jawaban (DA-10), enqueue `interview_evaluation` (priority 2), lalu panggil `TryRecordInterviewAttempts`. Sesi `ABANDONED` tidak membuat Attempt.
     - `TryRecordInterviewAttempts` (idempoten, hanya untuk sesi `COMPLETED`): tunda bila ada jawaban sesi `pending` atau `failed`. Bila tidak, panggil `RecordAttempt` satu kali per Topic yang tercakup, kecuali Topic yang seluruh jawabannya `unscored` (tanpa `topic_attempts`, mastery tidak berubah). Dipanggil dari finalisasi, handler hasil evaluasi, dan job `UnscoreExpiredFailedAnswers` (didaftarkan sebagai callback pada tugas 18.9).
     - Handler `interview_evaluation`: validasi output (`additionalProperties: false`, tanpa `overall_score`), hitung skor di server dengan `ScoreInterview`, simpan `interview_evaluations` (`status`, `dimension_scores`, `weights`, `prompt_contract_id`, `model_name`, `raw_output`). `overall_score` tidak menjadi input `score_pct` Attempt maupun Mastery v1. Kegagalan menandai `failed` tanpa memengaruhi Attempt. `POST /interviews/{id}/evaluation/retry` (202) untuk evaluasi dimensi `failed`.
     - _Requirements: 11.15, 21.7, 21.8, 21.9, 21.11, 25.10_
 
-  - [~] 23.5 Implementasi report interview
+  - [x] 23.5 Implementasi report interview
     - `GET /interviews/{id}/evaluation`: `overall_score`, `dimension_scores`, `weights`, `summary`, skor per Topic, status Mastery terbaru Topic yang tercakup, dan status evaluasi (`pending`, `succeeded`, `failed`). Hasil interview menampilkan `evaluation_status` dan `evaluation_retry_count` setiap jawaban. Hanya pemilik, `not_found` untuk pihak lain.
     - _Requirements: 10.3, 11.15, 21.6, 21.7, 21.8, 25.11_
 
@@ -662,12 +662,12 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Dengan provider replay: create, start, jawab, follow-up, pause, resume, finish, evaluasi, report, dan perubahan mastery. Termasuk provider 429 lalu fallback dan pinning versi Prompt_Contract setelah versi aktif diganti.
     - _Requirements: 11.6, 11.7, 15.6, 16.8, 16.9, 21.8_
 
-  - [~] 23.7 Implementasi Evaluation_Retry untuk jawaban interview
+  - [x] 23.7 Implementasi Evaluation_Retry untuk jawaban interview
     - `POST /interviews/{session_id}/messages/{message_id}/evaluation/retry` (pesan `kind = answer`), hanya pemilik. Memakai prosedur retry yang sama dengan assessment (tugas 16.4): `FOR UPDATE`, `ApplyEvaluationEvent(retry_requested)`, Prompt_Contract dari versi tersimpan pada sesi, AITask `answer_evaluation` priority 1, `idempotency_key` `eval-retry:{message_id}:{retry_count}`.
     - 202 bila AITask baru dibuat, 200 bila `pending` atau `scored`, 409 `evaluation_not_retryable` untuk `unscored` atau retry habis, `session_not_active` untuk sesi `ABANDONED`, dan 429 (`rate_limited`, `ai_quota_exceeded`, `ai_queue_limit_exceeded`) tanpa mengubah status. Sesi `COMPLETED` boleh di-retry dan hasilnya hanya menambah skor Attempt tanpa follow-up (lanjut ke `TryRecordInterviewAttempts`). Isi jawaban tidak berubah.
     - _Requirements: 10.14, 21.12, 25.2, 25.3, 25.4, 25.5, 25.6, 25.7_
 
-  - [~] 23.8 Write property test untuk skor Attempt interview dari jawaban scored
+  - [x] 23.8 Write property test untuk skor Attempt interview dari jawaban scored
     - **Property 28: Skor Attempt hanya dari jawaban scored dan unscored tidak berpengaruh**
     - **Kategori:** Wajib (area 1: scoring free-text). Nama test `TestPropW28_<Judul>` (bagian interview).
     - Bagian interview: `AggregateInterviewTopic` bernilai `null` bila seluruh jawaban Topic bukan `scored`, dan jawaban `unscored` atau `failed` pada sebuah rantai tidak mengubah skor rantai yang memiliki jawaban `scored` lain.
@@ -678,12 +678,12 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 21.11, 21.12, 25.2, 25.5, 25.6, 25.9, 25.10_
 
 - [ ] 24. Finalisasi lintas fase
-  - [~] 24.1 Tambahkan contract test untuk contoh JSON dan DTO
+  - [x] 24.1 Tambahkan contract test untuk contoh JSON dan DTO
     - `santhosh-tekuri/jsonschema` dengan fixture di `test/fixtures`: contoh request dan response API, contoh Prompt_Contract valid dan tidak valid, serta kesesuaian nama field `snake_case` dengan DTO.
     - Setiap endpoint terdokumentasi dengan method, path, role, dan kode error, termasuk endpoint Evaluation_Retry, `/admin/settings`, dan `/admin/ai-quota-settings`. Response hasil assessment dan interview memuat `evaluation_status` dan `evaluation_retry_count`, response App_Settings memuat `is_initial_value`.
     - _Requirements: 1.4, 1.5, 1.7, 9.10, 10.14, 10.15, 24.4, 25.11_
 
-  - [~] 24.2 Konfigurasi pipeline CI dan gerbang property wajib
+  - [x] 24.2 Konfigurasi pipeline CI dan gerbang property wajib
     - `go vet`, `staticcheck`, `gofmt`, unit test, integration test, contract test, pemeriksaan migrasi (up, down, up, diff schema).
     - Property wajib (Requirement 26.1, 26.2) menjadi gerbang merge: `go test -race -rapid.checks=100 -run '^TestPropW' ./...`, kegagalan memblokir merge. Property opsional (`-run '^TestPropO'`) berjalan pada job terpisah yang melaporkan kegagalan tanpa memblokir merge.
     - Skrip pemeriksa memastikan test `TestPropW<N>_*` ada untuk setiap N berkategori Wajib (3, 5, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 27, 28, 29), sehingga property wajib tidak dapat terlewat dari gerbang.
@@ -691,7 +691,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Tag komentar `// Feature: backend-lab-technical-specs, Property N: <judul>` dan `// Kategori: Wajib` atau `// Kategori: Opsional` pada seluruh property test.
     - _Requirements: 2.6, 2.7, 17.9, 17.12, 17.13, 26.2, 26.3, 26.5_
 
-- [~] 25. Checkpoint Phase 4
+- [x] 25. Checkpoint Phase 4
   - Ensure all tests pass, ask the user if questions arise.
   - Pastikan seluruh property wajib lulus sebagai gerbang CI (Property 3, 5, 8, 9, 11 sampai 22, 27, 28, 29): `go test -race -rapid.checks=100 -run '^TestPropW' ./...`.
 
