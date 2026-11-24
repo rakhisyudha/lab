@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS user_roadmaps;
+DROP TABLE IF EXISTS roadmap_topics;
+DROP TABLE IF EXISTS roadmap_translations;
+DROP TABLE IF EXISTS roadmaps;
+DROP TABLE IF EXISTS question_concepts;
+DROP TABLE IF EXISTS question_translations;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS misconception_translations;
+DROP TABLE IF EXISTS misconceptions;
+DROP FUNCTION IF EXISTS misconceptions_immutable();
+DROP TABLE IF EXISTS concept_translations;
+DROP TABLE IF EXISTS concepts;
+DROP TABLE IF EXISTS material_translations;
+DROP TABLE IF EXISTS materials;
+DROP TABLE IF EXISTS topic_prerequisites;
+DROP TABLE IF EXISTS topic_translations;
+DROP TABLE IF EXISTS topics;

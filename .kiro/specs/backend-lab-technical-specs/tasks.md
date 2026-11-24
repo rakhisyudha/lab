@@ -27,7 +27,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - `db`: `pgxpool`, `SET TIME ZONE 'UTC'`, helper `WithTx` yang mengulang hingga 3 kali pada `40P01` dan `40001` dengan jitter 10 sampai 50 ms.
     - _Requirements: 2.1, 2.2, 16.17, 16.18, 18.6_
 
-  - [-] 1.2 Implementasi `platform/httpx`: Error_Envelope, middleware, dan health check
+  - [x] 1.2 Implementasi `platform/httpx`: Error_Envelope, middleware, dan health check
     - `apperr.Error{Code, HTTPStatus, Details}` dan daftar `code` minimal (`validation_error`, `unauthenticated`, `forbidden`, `not_found`, `translation_not_available`, `conflict`, `rate_limited`, `ai_quota_exceeded`, `ai_queue_limit_exceeded`, `ai_provider_unavailable`, `evaluation_not_retryable`, `internal_error`).
     - Middleware: `request_id` (header `X-Request-ID` dipakai bila cocok `^[A-Za-z0-9_-]{8,64}$`, selain itu UUID baru), log terstruktur (`request_id`, `user_id`, method, path, status, durasi), CORS berbasis daftar origin, `recover` (tanpa stack trace ke client).
     - Prefix `/api/v1`, petakan `validation_error` dengan `details[{field, reason}]`, dan `GET /api/v1/health` tanpa autentikasi yang tidak membocorkan konfigurasi.
@@ -41,7 +41,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Paket `platform/httpx`, fungsi `ResolveRequestID`, oracle regex referensi.
     - **Validates: Requirements 9.4**
 
-  - [-] 1.4 Implementasi helper pagination cursor dan offset
+  - [x] 1.4 Implementasi helper pagination cursor dan offset
     - Cursor keyset (`limit`, `cursor`, `next_cursor`) dengan decoder yang menolak cursor rusak sebagai `validation_error`.
     - Offset pagination (`limit`, `offset`, `total`). Default dan maksimum `limit` per jenis daftar sesuai tabel pada design 2.3.
     - _Requirements: 9.5, 9.6, 9.7_
@@ -65,14 +65,14 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Validates: Requirements 24.3, 24.4, 24.6**
 
 - [ ] 2. Migrasi database (seluruh migrasi P0)
-  - [-] 2.1 Siapkan `cmd/migrate` dan tulis migrasi `0001_helpers` serta `0002_locales_auth`
+  - [x] 2.1 Siapkan `cmd/migrate` dan tulis migrasi `0001_helpers` serta `0002_locales_auth`
     - `cmd/migrate up|down` dengan `golang-migrate`, opsi `--include-p1` (dipakai pada tugas opsional 26).
     - `0001`: `set_updated_at`, `attach_updated_at_trigger`, `enforce_reviewer_admin`, `attach_translation_triggers`.
     - `0002`: `supported_locales`, `users` (unique `lower(email)`), `invitations`, `refresh_tokens`.
     - Satu file `.up.sql` dan `.down.sql` per migrasi. Enum memakai `text` + `CHECK`.
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 3.6, 7.1, 7.2, 7.3_
 
-  - [~] 2.2 Tulis migrasi `0003_content`
+  - [x] 2.2 Tulis migrasi `0003_content`
     - `topics`, `materials`, `concepts`, `misconceptions` (trigger immutabilitas `code` dan `topic_id`), `questions`, `question_concepts`, `topic_prerequisites`, `roadmaps`, `roadmap_topics`, `user_roadmaps`, serta seluruh tabel `*_translations`.
     - Unique `(entitas, locale)`, partial unique index `published`, constraint `published` mensyaratkan reviewer, `reviewed_at`, dan `published_at`.
     - Soft delete (`deleted_at`) dengan partial index `WHERE deleted_at IS NULL`.

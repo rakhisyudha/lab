@@ -212,7 +212,7 @@ func TestMigrateUpDownIntegration(t *testing.T) {
 		t.Fatalf("up: %v (output: %s)", err, out.String())
 	}
 	assertTablesExist(t, conn, true)
-	assertSchemaVersion(t, conn, "2")
+	assertSchemaVersion(t, conn, "3")
 
 	// Requirement 2.2 dan 7.1: email unik tidak sensitif huruf besar-kecil.
 	_, err = conn.Exec(ctx, `INSERT INTO users (email, password_hash) VALUES ('Learner@Example.id', 'h')`)
