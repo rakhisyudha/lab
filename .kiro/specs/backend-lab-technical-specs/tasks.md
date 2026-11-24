@@ -174,7 +174,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Vitest dengan dua tab tiruan dan sepuluh permintaan paralel pada Access_Token kedaluwarsa: server palsu hanya menerima satu `refresh`, seluruh permintaan memakai pasangan token yang sama, dan tidak ada `refresh_token_reuse_detected`.
     - _Requirements: 8.12_
 
-- [ ] 4. Konten bilingual dan workflow Translation
+- [x] 4. Konten bilingual dan workflow Translation
   - [x] 4.1 Implementasi resolusi Locale dan filter Published_Translation sebagai fungsi murni
     - `internal/evaluation/locale.go`: `ParseAcceptLanguage`, `ResolveLocale` (urutan query, `Accept-Language`, preferensi user, Default_Locale, pemetaan `id-ID` ke `id`), `FilterPublished`, `GetDetail` (`translation_not_available` dengan `available_locales` terurut).
     - _Requirements: 5.1, 5.2, 5.3, 5.9_
@@ -194,7 +194,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Kategori:** Wajib (area 7: aturan status dan lifecycle, Translation). Nama test `TestPropW3_<Judul>`.
     - **Validates: Requirements 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 26.2**
 
-  - [~] 4.5 Implementasi endpoint konten Learner
+  - [x] 4.5 Implementasi endpoint konten Learner
     - `GET /topics`, `/topics/{id}` (id atau slug), `/topics/{id}/materials`, `/materials/{id}`, `/roadmaps`, `/roadmaps/{id}` dengan parameter `locale`.
     - Hanya entitas ber-Published_Translation pada Locale permintaan. Setiap response memuat field `locale` dan header `Content-Language`. Daftar memakai cursor pagination.
     - _Requirements: 5.4, 5.5, 5.6, 5.7, 5.8, 10.2, 20.3_
@@ -204,19 +204,19 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Kategori:** Opsional (di luar delapan area inti). Nama test `TestPropO2_<Judul>`.
     - **Validates: Requirements 5.4, 5.5, 5.6, 5.7, 5.8, 20.3**
 
-- [ ] 5. CMS admin
-  - [~] 5.1 Implementasi CRUD admin untuk entitas induk
+- [x] 5. CMS admin
+  - [x] 5.1 Implementasi CRUD admin untuk entitas induk
     - `GET`, `POST /admin/{resource}` dan `GET`, `PATCH`, `DELETE /admin/{resource}/{id}` untuk `topics`, `materials`, `concepts`, `questions`, `roadmaps`, `misconceptions`.
     - DELETE berupa soft delete atau `is_active=false`. Daftar admin memakai offset pagination. Hanya role `admin`.
     - Kelola `question_concepts` (`weight`, `is_required`) dan `roadmap_topics`.
     - _Requirements: 3.1, 3.7, 10.6, 20.2_
 
-  - [~] 5.2 Implementasi endpoint Translation admin
+  - [x] 5.2 Implementasi endpoint Translation admin
     - `PUT /admin/{resource}/{id}/translations/{locale}` dan `POST .../transitions` yang memakai service pada 4.3.
     - Tolak transisi `published` untuk Question tanpa Concept atau dengan `reference_answer` kosong.
     - _Requirements: 3.2, 3.4, 4.3, 4.4, 10.6, 20.4_
 
-  - [~] 5.3 Implementasi katalog Misconception dan prasyarat Topic
+  - [x] 5.3 Implementasi katalog Misconception dan prasyarat Topic
     - Buat, ubah `severity` dan Translation, serta nonaktifkan Misconception (`is_active=false` tanpa menghapus baris dan tanpa mengubah `user_misconceptions`). `code` tidak dapat diubah.
     - `PUT /admin/topics/{id}/prerequisites` dengan pencegahan siklus pada DAG.
     - _Requirements: 6.2, 6.3, 6.4, 6.5, 6.6, 10.7, 22.6_
@@ -225,8 +225,8 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - RBAC (user biasa mendapat `forbidden`), aturan publish Question, soft delete tidak muncul pada response Learner, siklus prasyarat ditolak, nonaktifkan Misconception tidak mengubah `user_misconceptions`.
     - _Requirements: 6.6, 10.6, 10.10, 20.4_
 
-- [ ] 6. Progress Learner
-  - [~] 6.1 Implementasi repository dan endpoint progress
+- [x] 6. Progress Learner
+  - [x] 6.1 Implementasi repository dan endpoint progress
     - `GET /me/progress`, `GET /me/progress/topics/{topic_id}` (`NOT_STARTED` bila belum ada), `GET /me/misconceptions?status=detected|resolved`.
     - Response memuat `interview_ready` nullable dan `evidence`. Learner hanya membaca data milik sendiri.
     - _Requirements: 10.4, 12.2, 12.5, 12.7, 18.3_
@@ -235,7 +235,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Isolasi antar user (`not_found`), default `NOT_STARTED`, `interview_ready` bernilai null.
     - _Requirements: 12.5, 12.7, 18.3_
 
-- [~] 7. Checkpoint Phase 1
+- [x] 7. Checkpoint Phase 1
   - Ensure all tests pass, ask the user if questions arise.
   - Jalankan juga property wajib Phase 1 (Property 3 dan 5): `go test -race -rapid.checks=100 -run '^TestPropW' ./...`.
 

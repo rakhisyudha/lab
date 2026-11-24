@@ -1,19 +1,28 @@
 // Command api adalah HTTP server Backend_Lab (Gin, prefix /api/v1).
-//
-// Pada tahap tugas 1.1, binary ini hanya memuat dan memvalidasi konfigurasi
-// (termasuk aturan penyimpanan queue dan rate limit). Server HTTP dipasang di
-// tugas 1.2.
+// Binary ini merakit seluruh modul Phase 1: auth, konten, CMS, dan progress.
 package main
 
 import (
+	"context"
 	"errors"
+	"flag"
 	"fmt"
+	"log/slog"
+	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
+	"github.com/rakhisyudha/lab/internal/auth"
+	"github.com/rakhisyudha/lab/internal/content"
+	"github.com/rakhisyudha/lab/internal/platform/clock"
 	"github.com/rakhisyudha/lab/internal/platform/config"
+	"github.com/rakhisyudha/lab/internal/platform/db"
+	"github.com/rakhisyudha/lab/internal/platform/httpx"
+	"github.com/rakhisyudha/lab/internal/platform/settings"
+	"github.com/rakhisyudha/lab/internal/progress"
 )
-
-var errNotYetImplemented = errors.New("server HTTP belum dipasang (tugas 1.2)")
 
 func main() {
 	if err := run(); err != nil {
@@ -23,11 +32,81 @@ func main() {
 }
 
 func run() error {
+	withWorker := flag.Bool("with-worker", false, "jalankan worker di proses yang sama (single-instance/dev)")
+	flag.Parse()
+	_ = withWorker // worker AITask dipasang pada Phase 2.
+
 	cfg, err := config.Load()
 	if err != nil {
 		return err
 	}
-	fmt.Fprintf(os.Stderr, "api: konfigurasi valid (deployment_mode=%s, rate_limit_store=%s, queue_store=%s)\n",
-		cfg.DeploymentMode, cfg.RateLimitStore, cfg.QueueStore)
-	return errNotYetImplemented
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	pool, err := db.NewPool(ctx, cfg.DatabaseURL.Reveal())
+	if err != nil {
+		return err
+	}
+	defer pool.Close()
+	if err := pool.Ping(ctx); err != nil {
+		return fmt.Errorf("api: koneksi database: %w", err)
+	}
+
+	logger := slog.New(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelInfo}))
+	c := clock.System{}
+	settingsSvc := settings.New(settings.NewPostgresStore(pool), c, 30*time.Second)
+
+	authStore := auth.NewStore(pool)
+	issuer := auth.NewTokenIssuer(cfg.JWTSigningKey.Reveal())
+	authSvc := auth.NewService(authStore, issuer, settingsSvc, c, auth.DefaultPasswordPolicy(), 0)
+	authHandler := auth.NewHandler(authSvc)
+	middleware := auth.NewMiddleware(issuer)
+
+	contentHandler := content.NewHandler(content.NewStore(pool))
+	progressHandler := progress.NewHandler(progress.NewStore(pool))
+
+	engine, api := httpx.NewRouter(httpx.Options{
+		Logger:             logger,
+		CORSAllowedOrigins: cfg.CORSAllowedOrigins,
+		HealthCheck:        func(ctx context.Context) error { return pool.Ping(ctx) },
+	})
+
+	authHandler.RegisterRoutes(api, middleware)
+	contentHandler.RegisterRoutes(api, api.Group("/admin", middleware.Authenticate(), auth.RequireRole("admin")))
+	progressHandler.RegisterRoutes(api.Group("/me", middleware.Authenticate()))
+
+	addr := os.Getenv("PORT")
+	if addr == "" {
+		addr = ":8080"
+	} else if addr[0] != ':' {
+		addr = ":" + addr
+	}
+	srv := &http.Server{
+		Addr:              addr,
+		Handler:           engine,
+		ReadHeaderTimeout: 10 * time.Second,
+		ReadTimeout:       30 * time.Second,
+		WriteTimeout:      60 * time.Second,
+		IdleTimeout:       120 * time.Second,
+	}
+
+	errCh := make(chan error, 1)
+	go func() {
+		logger.Info("api: server siap", slog.String("addr", srv.Addr))
+		if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			errCh <- err
+		}
+	}()
+
+	signals := make(chan os.Signal, 1)
+	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
+	select {
+	case err := <-errCh:
+		return err
+	case <-signals:
+	}
+
+	shutdownCtx, stop := context.WithTimeout(context.Background(), 30*time.Second)
+	defer stop()
+	return srv.Shutdown(shutdownCtx)
 }
