@@ -7,15 +7,26 @@ import (
 	"log/slog"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
+	"github.com/google/uuid"
+
+	"github.com/rakhisyudha/lab/internal/ai/evalresult"
+	"github.com/rakhisyudha/lab/internal/ai/evaluator"
+	"github.com/rakhisyudha/lab/internal/ai/gateway"
+	"github.com/rakhisyudha/lab/internal/ai/jobs"
+	"github.com/rakhisyudha/lab/internal/ai/provider"
 	"github.com/rakhisyudha/lab/internal/ai/taskqueue"
 	aiworker "github.com/rakhisyudha/lab/internal/ai/worker"
+	"github.com/rakhisyudha/lab/internal/assessment"
 	"github.com/rakhisyudha/lab/internal/platform/clock"
 	"github.com/rakhisyudha/lab/internal/platform/config"
 	"github.com/rakhisyudha/lab/internal/platform/db"
 	"github.com/rakhisyudha/lab/internal/platform/ratelimit"
+	"github.com/rakhisyudha/lab/internal/platform/settings"
+	"github.com/rakhisyudha/lab/internal/progress"
 )
 
 func main() {
@@ -44,27 +55,79 @@ func run() error {
 
 	logger := slog.New(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelInfo}))
 	c := clock.System{}
-	queue := taskqueue.NewPostgresQueue(pool)
+	settingsSvc := settings.New(settings.NewPostgresStore(pool), c, 30*time.Second)
 
-	// Job pemeliharaan bucket berjalan bersamaan dengan loop AITask.
+	var limiter ratelimit.Store
+	if cfg.RateLimitStore == config.StoreMemory {
+		limiter = ratelimit.NewMemoryStore()
+	} else {
+		limiter = ratelimit.NewPostgresStore(pool)
+	}
+
+	var providers []provider.Provider
+	rows, err := pool.Query(ctx, `SELECT provider_name, model_name FROM ai_provider_settings
+		WHERE is_enabled ORDER BY fallback_order`)
+	if err != nil {
+		return err
+	}
+	for rows.Next() {
+		var name, model string
+		if err := rows.Scan(&name, &model); err != nil {
+			rows.Close()
+			return err
+		}
+		prefix := strings.ToUpper(name)
+		providers = append(providers, provider.NewHTTPProvider(name,
+			os.Getenv(prefix+"_BASE_URL"), model, os.Getenv(prefix+"_API_KEY")))
+	}
+	rows.Close()
+
+	contracts, err := evaluator.LoadContracts(ctx, pool)
+	if err != nil {
+		return err
+	}
+	gw := gateway.New(providers, limiter, settingsSvc, c)
+	evalSvc := evaluator.NewService(pool, gw, contracts, settingsSvc, c)
+	masterySvc := progress.NewMasteryService(pool, settingsSvc)
+	assessmentStore := assessment.NewStore(pool)
+	finalizer := assessment.NewFinalizer(assessmentStore, masterySvc)
+	resultSvc := evalresult.NewService(pool, evalSvc, finalizer, settingsSvc, c)
+
+	queue := taskqueue.NewPostgresQueue(pool)
+	runner := aiworker.New(aiworker.Options{
+		Queue: queue, Logger: logger, Clock: c,
+		Handlers: map[string]aiworker.Handler{
+			"answer_evaluation": aiworker.AnswerEvaluationHandler(evalSvc, resultSvc),
+		},
+	})
+
+	// Job pemeliharaan: purge bucket dan unscore jawaban failed > jendela retry.
 	go func() {
-		ticker := time.NewTicker(time.Hour)
-		defer ticker.Stop()
+		purge := time.NewTicker(time.Hour)
+		unscore := time.NewTicker(15 * time.Minute)
+		defer purge.Stop()
+		defer unscore.Stop()
 		for {
 			select {
 			case <-ctx.Done():
 				return
-			case <-ticker.C:
+			case <-purge.C:
 				if err := ratelimit.PurgeIdleBuckets(ctx, pool, c.Now(), time.Hour); err != nil {
 					logger.Error("worker: purge buckets", slog.Any("error", err))
+				}
+			case <-unscore.C:
+				n, err := jobs.UnscoreExpiredFailed(ctx, pool, settingsSvc, c.Now(),
+					func(ctx context.Context, attemptID uuid.UUID, now time.Time) error {
+						return finalizer.TryFinalize(ctx, attemptID, now)
+					})
+				if err != nil {
+					logger.Error("worker: unscore", slog.Any("error", err))
+				} else if n > 0 {
+					logger.Info("worker: unscore selesai", slog.Int("attempts", n))
 				}
 			}
 		}
 	}()
-
-	runner := aiworker.New(aiworker.Options{
-		Queue: queue, Handlers: map[string]aiworker.Handler{}, Logger: logger, Clock: c,
-	})
 
 	errCh := make(chan error, 1)
 	go func() { errCh <- runner.Run(ctx) }()
@@ -77,7 +140,6 @@ func run() error {
 	case <-signals:
 	}
 
-	// Graceful shutdown: beri waktu 30 detik bagi handler yang berjalan selesai.
 	cancel()
 	shutdownCtx, stop := context.WithTimeout(context.Background(), 30*time.Second)
 	defer stop()

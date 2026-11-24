@@ -185,7 +185,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - **Validates: Requirements 5.1, 5.2, 5.3**
 
   - [x] 4.3 Implementasi workflow Translation sebagai fungsi murni dan service
-    - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`Ã¢â€ â€™`in_review`, `in_review`Ã¢â€ â€™`draft`, `in_review`Ã¢â€ â€™`published`, `published`Ã¢â€ â€™`archived`, `archived`Ã¢â€ â€™`draft`), `invalid_status_transition` dan `version_conflict` (409).
+    - `ApplyTransition` dan `ApplyEdit` di paket `content`: tabel transisi valid (`draft`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`in_review`, `in_review`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`draft`, `in_review`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`published`, `published`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`archived`, `archived`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`draft`), `invalid_status_transition` dan `version_conflict` (409).
     - Translation baru berstatus `draft` dengan `version` 1. Ubah teks menaikkan `version` lewat `UPDATE ... WHERE version = $2`. Edit pada `published` mengembalikan ke `draft` dan mengosongkan `published_at`. Transisi ke `published` mensyaratkan `reviewer_id` ber-role `admin` dan mengisi `reviewed_at`, `published_at`.
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 26.4_
 
@@ -278,7 +278,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
 
 - [ ] 10. Task service
   - [x] 10.1 Implementasi `NextTaskState` sebagai fungsi murni
-    - `internal/evaluation/tasklife.go`: transisi hanya `queued`Ã¢â€ â€™`processing` (`run_after <= now`), `processing`Ã¢â€ â€™`completed`, `processing`Ã¢â€ â€™`queued` (`requeue` dengan `count_attempt`), `processing`Ã¢â€ â€™`failed`, dan `lock_expired` (kembali ke `queued` bila `attempts < max_attempts`, selain itu `failed` dengan `ai_provider_unavailable`). `completed` dan `failed` terminal, transisi lain menghasilkan `invalid_task_transition`.
+    - `internal/evaluation/tasklife.go`: transisi hanya `queued`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`processing` (`run_after <= now`), `processing`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`completed`, `processing`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`queued` (`requeue` dengan `count_attempt`), `processing`ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢`failed`, dan `lock_expired` (kembali ke `queued` bila `attempts < max_attempts`, selain itu `failed` dengan `ai_provider_unavailable`). `completed` dan `failed` terminal, transisi lain menghasilkan `invalid_task_transition`.
     - Invarian: `status = processing` jika dan hanya jika `locked_at` terisi, `completed` memiliki `result`, `failed` memiliki `error_code`, `0 <= attempts <= max_attempts`.
     - _Requirements: 16.5, 16.10, 16.13, 26.4_
 
@@ -445,27 +445,27 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
 ### Phase 3: Assessment, free-text evaluation, Evaluation_Retry, Mastery v1, rekomendasi
 
 - [ ] 16. Assessment engine
-  - [~] 16.1 Implementasi pembuatan attempt dan pembacaan hasil
+  - [x] 16.1 Implementasi pembuatan attempt dan pembacaan hasil
     - `POST /assessments/attempts`: pilih Question `published` pada Topic dan Locale dengan `purpose` `assessment` atau `both`, sertakan sedikitnya satu pertanyaan `application` atau `scenario` bila tersedia. Error `insufficient_questions` dan `translation_not_available`.
     - `GET /assessments/attempts` (cursor), `GET /assessments/attempts/{id}` dengan umpan balik per pertanyaan. Setiap jawaban menampilkan `evaluation_status` dan `evaluation_retry_count`, dan attempt dapat berstatus `unscored`. Kepemilikan dilanggar menghasilkan `not_found`.
     - _Requirements: 10.12, 20.3, 20.5, 20.6, 25.11_
 
-  - [~] 16.2 Implementasi `ApplyEvaluationEvent` sebagai fungsi murni
+  - [x] 16.2 Implementasi `ApplyEvaluationEvent` sebagai fungsi murni
     - `internal/evaluation/evalstate.go`: satu-satunya tempat aturan perpindahan Answer_Evaluation_Status untuk jawaban assessment dan jawaban interview. Peristiwa `submit`, `eval_ok`, `eval_failed`, `retry_requested`, `window_tick`, `session_closed`. Efek `enqueue_evaluation` dan hasil `noop_200` atau `evaluation_not_retryable` dikembalikan ke pemanggil (fungsi tidak melakukan I/O, Requirement 26.4).
     - Jawaban kosong menjadi `scored` saat `submit` tanpa efek enqueue, jawaban non-kosong menjadi `pending` dengan satu efek `enqueue_evaluation`. `eval_failed` mengisi `failed_at` hanya pada kegagalan pertama dan menghasilkan `unscored` jika `retry_count >= max_evaluation_retries`, selain itu `failed`. `retry_requested` pada `failed` dengan `retry_count < max` menghasilkan `pending`, `retry_count + 1`, dan satu efek enqueue. `retry_requested` pada `pending` atau `scored` idempoten (`noop_200`), pada `unscored`, `null`, atau `failed` dengan retry habis menghasilkan `evaluation_not_retryable`. `window_tick` menjadikan `failed` sebagai `unscored` setelah `evaluation_retry_window_hours`. `scored` dan `unscored` terminal, isi jawaban tidak pernah berubah.
     - _Requirements: 20.7, 25.1, 25.3, 25.4, 25.5, 25.6, 25.8, 25.9, 26.4_
 
-  - [~] 16.3 Implementasi simpan jawaban dan submit
+  - [x] 16.3 Implementasi simpan jawaban dan submit
     - `PUT /assessments/attempts/{id}/answers/{question_id}` (`attempt_not_active`).
     - `POST .../submit` (202) dalam satu transaksi: ubah status attempt menjadi `submitted`, terapkan `ApplyEvaluationEvent(submit)` per jawaban, periksa kuota dan batas antrean (Quota_Manager), enqueue satu AITask `answer_evaluation` per jawaban non-kosong (menghormati header `Idempotency-Key`, menyimpan `evaluation_prompt_contract_id` dengan versi aktif saat submit), dan beri skor `clamp_min` (0 pada Initial_Value) tanpa AI untuk jawaban kosong (jawaban kosong langsung `scored` dan ikut skor Attempt, DA-15).
     - _Requirements: 16.3, 16.11, 20.5, 20.7, 25.1_
 
-  - [~] 16.4 Implementasi Evaluation_Retry untuk jawaban assessment
+  - [x] 16.4 Implementasi Evaluation_Retry untuk jawaban assessment
     - `POST /assessments/attempts/{attempt_id}/answers/{question_id}/evaluation/retry`, hanya pemilik jawaban (user lain, termasuk admin, mendapat `not_found`). Satu transaksi: `SELECT ... FOR UPDATE` jawaban, `ApplyEvaluationEvent(retry_requested)`, lalu enqueue satu AITask `answer_evaluation` dengan Prompt_Contract yang sama dengan evaluasi sebelumnya (`evaluation_prompt_contract_id`) dan `idempotency_key` `eval-retry:{answer_id}:{retry_count}`.
     - Hasil: 202 bila AITask baru dibuat, 200 dengan status saat ini bila sudah `pending` atau `scored` (tanpa AITask baru dan tanpa menaikkan `evaluation_retry_count`), 409 `evaluation_not_retryable` (`details.reason`) untuk `unscored`, belum disubmit, atau retry habis. Rate limit kelas AI, kuota, dan `per_user_queue_limit` berlaku seperti AITask lain. Bila `rate_limited`, `ai_quota_exceeded`, atau `ai_queue_limit_exceeded`, transaksi di-rollback dan status serta `evaluation_retry_count` tidak berubah. Isi jawaban tidak berubah. Retry paralel menghasilkan tepat satu AITask.
     - _Requirements: 10.14, 16.3, 16.4, 16.11, 25.2, 25.3, 25.4, 25.5, 25.6, 25.7_
 
-  - [~] 16.5 Write property test untuk siklus Answer_Evaluation_Status
+  - [x] 16.5 Write property test untuk siklus Answer_Evaluation_Status
     - **Property 27: Siklus Answer_Evaluation_Status dan Evaluation_Retry idempoten**
     - **Kategori:** Wajib (area 7: aturan status dan lifecycle, Answer_Evaluation_Status). Nama test `TestPropW27_<Judul>`.
     - Paket `evaluation`, `ApplyEvaluationEvent` dan model `RetryEvaluation` dengan `Enqueue` palsu (termasuk Enqueue yang gagal oleh rate limit, kuota, atau antrean), urutan peristiwa acak pada waktu non-menurun.
@@ -480,18 +480,18 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 25.2, 25.3, 25.4, 25.5, 25.6, 25.7, 25.8_
 
 - [ ] 17. Free-text evaluation dan siklus Misconception
-  - [~] 17.1 Implementasi handler AITask `answer_evaluation` beserta penyimpanan
+  - [x] 17.1 Implementasi handler AITask `answer_evaluation` beserta penyimpanan
     - Jalankan Evaluator (12.4) dan simpan `answer_evaluations` serta `answer_evaluation_misconceptions` secara idempoten lewat unique index sumber, dengan `prompt_contract_id`, `model_name`, `params_snapshot`, `raw_output` terverifikasi (teks Learner dipotong 300 karakter pada evidence).
     - Terapkan `ApplyEvaluationEvent`: hasil sukses (`eval_ok`) menjadikan jawaban `scored`. AITask `failed` (`eval_failed`) menjadikan jawaban `failed` dengan `evaluation_failed_at` pada kegagalan pertama, atau `unscored` bila `evaluation_retry_count` sudah mencapai `ai.max_evaluation_retries`. Hasil yang datang terlambat pada jawaban yang sudah `scored` atau `unscored` dibuang tanpa menulis `answer_evaluations`.
     - Evaluasi `failed` atau `unscored` tidak mengubah `mastery_records` dan `user_misconceptions`. Penyelesaian attempt dihubungkan pada tugas 18.6.
     - _Requirements: 13.12, 14.6, 14.8, 14.9, 20.8, 25.1, 25.8, 25.10_
 
-  - [~] 17.2 Implementasi `ApplyMisconceptionSignals` pada paket `misconception`
+  - [x] 17.2 Implementasi `ApplyMisconceptionSignals` pada paket `misconception`
     - Buat, buka kembali, atau pertahankan catatan `detected`. Ubah ke `resolved` ketika laporan `resolved_misconception_codes` berturut-turut mencapai `resolve_consecutive_required` (default 1). `severity` dibaca dari database.
     - Evaluasi berstatus `pending`, `failed`, atau `unscored` tidak mengubah state. Catatan `detected` untuk Critical_Misconception nonaktif tetap dihitung sebagai Unresolved_Critical_Misconception.
     - _Requirements: 13.6, 13.7, 13.9, 13.12, 25.10_
 
-  - [~] 17.3 Write property test untuk siklus Misconception
+  - [x] 17.3 Write property test untuk siklus Misconception
     - **Property 14: Siklus Misconception mengikuti model referensi**
     - **Kategori:** Wajib (area 2: Mastery v1 dan siklus Misconception). Nama test `TestPropW14_<Judul>`.
     - **Validates: Requirements 13.6, 13.7, 13.9, 13.12, 25.10, 26.2**
@@ -501,33 +501,33 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 13.12, 14.5, 14.6, 25.8_
 
 - [ ] 18. Mastery v1
-  - [~] 18.1 Implementasi `ComputeMastery` sebagai fungsi murni
+  - [x] 18.1 Implementasi `ComputeMastery` sebagai fungsi murni
     - `internal/evaluation/mastery.go`: `MASTERED` bila Attempt sedikitnya 3, rata-rata 3 terakhir sedikitnya `mastered_threshold` (80), tanpa Unresolved_Critical_Misconception, dan sedikitnya satu Attempt aplikatif pada jendela (`application_evidence_scope`, default `window`).
     - Status lain: `NOT_STARTED`, `IN_PROGRESS`, `PRACTICING`, `NEEDS_REVIEW` (`needs_review_floor` default 50, `ever_mastered` monoton, aturan sementara D-6). `evidence` memuat `attempt_ids`, `score_window`, flag Misconception, `blocking_reasons`, dan `parameters` (snapshot nilai parameter yang dipakai, semuanya Initial_Value kecuali diubah Admin). Urutan Attempt berdasarkan `(scored_at, id)`.
     - _Requirements: 12.4, 13.1, 13.2, 13.3, 13.4, 13.5, 13.10, 13.13, 24.7, 26.4_
 
-  - [~] 18.2 Write property test untuk karakterisasi MASTERED
+  - [x] 18.2 Write property test untuk karakterisasi MASTERED
     - **Property 15: MASTERED jika dan hanya jika keempat syarat terpenuhi**
     - **Kategori:** Wajib (area 2: Mastery v1). Nama test `TestPropW15_<Judul>`.
     - **Validates: Requirements 12.4, 13.2, 13.3, 13.5, 26.2**
 
-  - [~] 18.3 Write property test untuk determinisme Mastery
+  - [x] 18.3 Write property test untuk determinisme Mastery
     - **Property 16: Mastery deterministik, idempoten, dan status lain mengikuti tabel keputusan**
     - **Kategori:** Wajib (area 2: Mastery v1). Nama test `TestPropW16_<Judul>`.
     - **Validates: Requirements 13.1, 13.4, 13.10, 13.13, 24.7, 26.2**
 
-  - [~] 18.4 Implementasi `AggregateAssessment` dan `RecordAttempt`
+  - [x] 18.4 Implementasi `AggregateAssessment` dan `RecordAttempt`
     - `AggregateAssessment` (fungsi murni): hasil `deferred` bila ada jawaban `pending` atau `failed`. Hasil `unscored` bila seluruh jawaban non-kosong `unscored` (tanpa skor dan tanpa `topic_attempts`). Selain itu `scored` dengan rata-rata berbobot `weight` pertanyaan hanya atas jawaban `scored` (termasuk jawaban kosong yang `scored` dengan skor `clamp_min`), jawaban `unscored` dibuang dan tidak memengaruhi skor maupun `has_application_question`.
     - `RecordAttempt` dalam satu transaksi: simpan `topic_attempts`, terapkan `ApplyMisconceptionSignals`, hitung ulang dan simpan `mastery_records` (`rule_version`, `evidence.parameters`).
     - _Requirements: 12.1, 12.2, 12.6, 20.10, 20.11, 20.12, 25.10, 26.4_
 
-  - [~] 18.5 Write property test untuk agregasi Attempt
+  - [x] 18.5 Write property test untuk agregasi Attempt
     - **Property 13: Agregasi Attempt berada di antara skor terkecil dan terbesar yang disertakan**
     - **Kategori:** Wajib (area 1: scoring free-text). Nama test `TestPropW13_<Judul>`.
     - Bagian assessment (`AggregateAssessment`). Bagian interview ditambahkan pada tugas 23.3.
     - **Validates: Requirements 20.10, 21.8, 26.2**
 
-  - [~] 18.6 Hubungkan finalisasi attempt, `RecomputeMastery`, dan resolusi manual Admin
+  - [x] 18.6 Hubungkan finalisasi attempt, `RecomputeMastery`, dan resolusi manual Admin
     - `TryFinalizeAssessment` (satu transaksi, attempt dikunci `FOR UPDATE`, hanya bila `submitted`): `deferred` tidak melakukan apa pun (attempt tetap `submitted`), `unscored` mengisi `status = unscored` dan `resolved_at` tanpa `topic_attempts` serta tanpa perubahan mastery atau Misconception, `scored` mengisi `score_pct`, `has_application_question`, `scored_at`, `resolved_at` lalu memanggil `RecordAttempt`.
     - Dipanggil setelah setiap jawaban menjadi `scored` atau `unscored` (handler 17.1) dan saat submit bila seluruh jawaban kosong. Hasil attempt tersedia pada endpoint hasil (16.1).
     - `POST /admin/user-misconceptions/{id}/resolve` (alasan wajib, catat `resolved_by`) lalu `RecomputeMastery` untuk Topic tersebut. Endpoint progress (6.1) kini menampilkan data nyata.
@@ -537,13 +537,13 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Tabel keputusan dan contoh numerik yang mencakup setiap status, Misconception `minor` tidak memblokir `MASTERED`, injeksi kegagalan pada langkah terakhir `RecordAttempt` membatalkan seluruh perubahan.
     - _Requirements: 12.6, 13.10, 13.11_
 
-  - [~] 18.8 Write property test untuk skor Attempt dari jawaban scored
+  - [x] 18.8 Write property test untuk skor Attempt dari jawaban scored
     - **Property 28: Skor Attempt hanya dari jawaban scored dan unscored tidak berpengaruh**
     - **Kategori:** Wajib (area 1: scoring free-text). Nama test `TestPropW28_<Judul>`.
     - Bagian assessment: `AggregateAssessment` mengembalikan `deferred`, `unscored`, atau `scored` sesuai status jawaban, menambah atau menghapus jawaban `unscored` tidak mengubah `score_pct`, dan `RecordAttempt` pada urutan evaluasi yang hanya berisi `pending`, `failed`, atau `unscored` tidak mengubah `mastery_records` maupun `user_misconceptions`. Bagian interview ditambahkan pada tugas 23.8.
     - **Validates: Requirements 20.10, 20.11, 20.12, 25.10, 13.12, 26.2**
 
-  - [~] 18.9 Implementasi job `UnscoreExpiredFailedAnswers`
+  - [x] 18.9 Implementasi job `UnscoreExpiredFailedAnswers`
     - Job worker (jadwal tiap 15 menit): jawaban pada `assessment_answers` dan `interview_messages` dengan `evaluation_status = 'failed'` dan `evaluation_failed_at <= now - ai.evaluation_retry_window_hours` (Initial_Value 24 jam) menjadi `unscored` lewat `ApplyEvaluationEvent(window_tick)`. `UPDATE ... WHERE evaluation_status = 'failed' AND ... RETURNING` membuat job dan Evaluation_Retry bersamaan tidak saling menimpa.
     - Setelah itu memanggil `TryFinalizeAssessment` untuk attempt terkait dan callback finalisasi sesi interview (`TryRecordInterviewAttempts`, didaftarkan pada tugas 23.4).
     - _Requirements: 20.12, 25.9, 25.10_
@@ -553,16 +553,16 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - _Requirements: 20.10, 20.11, 20.12, 25.9, 25.10_
 
 - [ ] 19. Rekomendasi rule-based
-  - [~] 19.1 Implementasi `Recommend` sebagai fungsi murni
+  - [x] 19.1 Implementasi `Recommend` sebagai fungsi murni
     - `internal/evaluation/recommend.go`: prioritas (1) prerequisite belum `MASTERED`, (2) mastery rendah, (3) relevan dengan Roadmap Learner, (4) urutan kurikulum. Satu rekomendasi per Topic dengan rule berprioritas tertinggi, hanya Topic ber-Published_Translation dan belum `MASTERED`, hasil deterministik dan terpotong oleh `limit`.
     - _Requirements: 22.1, 22.3, 22.4, 22.5, 26.4_
 
-  - [~] 19.2 Write property test untuk rule engine rekomendasi
+  - [x] 19.2 Write property test untuk rule engine rekomendasi
     - **Property 19: Rule engine rekomendasi deterministik, terurut menurut prioritas, dan menampilkan rule penyebab**
     - **Kategori:** Wajib (area 5: rekomendasi). Nama test `TestPropW19_<Judul>`.
     - **Validates: Requirements 22.1, 22.2, 22.3, 22.4, 22.5, 26.2**
 
-  - [~] 19.3 Implementasi endpoint rekomendasi dan Roadmap Learner
+  - [x] 19.3 Implementasi endpoint rekomendasi dan Roadmap Learner
     - `GET /me/recommendations` (`locale`, `limit`) dengan field `rule{code, priority, params}` dan `action` (`study_material`, `take_assessment`, `review`).
     - `PUT`, `DELETE /me/roadmaps/{roadmap_id}` (tabel `user_roadmaps`).
     - _Requirements: 10.13, 22.2, 22.3, 22.6_
@@ -571,7 +571,7 @@ Property test dibagi dua kategori (D-16, Requirement 26). Property pada delapan 
     - Dua contoh numerik pada design 4.7 (termasuk kasus frontier prasyarat dan Topic di luar Roadmap).
     - _Requirements: 22.1, 22.4_
 
-- [~] 20. Checkpoint Phase 3
+- [x] 20. Checkpoint Phase 3
   - Ensure all tests pass, ask the user if questions arise.
   - Jalankan juga seluruh property wajib hingga Phase 3 (Property 3, 5, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 27, 28, 29): `go test -race -rapid.checks=100 -run '^TestPropW' ./...`.
 

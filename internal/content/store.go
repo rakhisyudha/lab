@@ -2,6 +2,7 @@ package content
 
 import (
 	"context"
+	"database/sql"
 	"errors"
 	"fmt"
 	"strings"
@@ -503,13 +504,19 @@ func (s *Store) QuestionCanPublish(ctx context.Context, questionID uuid.UUID) (b
 	if err := s.pool.QueryRow(ctx, `SELECT count(*) FROM question_concepts WHERE question_id = $1`, questionID).Scan(&concepts); err != nil {
 		return false, err
 	}
-	var reference string
+	var reference sql.NullString
+	// Saat transisi ke published dijalankan, baris Translation masih berstatus
+	// in_review; periksa semua status yang mungkin.
 	if err := s.pool.QueryRow(ctx,
-		`SELECT reference_answer FROM question_translations WHERE question_id = $1 AND status = 'published'`,
+		`SELECT reference_answer FROM question_translations WHERE question_id = $1
+		 ORDER BY CASE status WHEN 'in_review' THEN 0 WHEN 'draft' THEN 1 ELSE 2 END LIMIT 1`,
 		questionID).Scan(&reference); err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return false, nil
+		}
 		return false, err
 	}
-	return concepts > 0 && strings.TrimSpace(reference) != "", nil
+	return concepts > 0 && strings.TrimSpace(reference.String) != "", nil
 }
 
 // replaceQuestionConcepts mengganti relasi Question-Concept dalam satu transaksi.

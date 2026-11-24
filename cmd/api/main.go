@@ -22,8 +22,10 @@ import (
 	"github.com/rakhisyudha/lab/internal/ai/evaluator"
 	"github.com/rakhisyudha/lab/internal/ai/gateway"
 	"github.com/rakhisyudha/lab/internal/ai/provider"
+	"github.com/rakhisyudha/lab/internal/ai/quota"
 	"github.com/rakhisyudha/lab/internal/ai/schema"
 	"github.com/rakhisyudha/lab/internal/ai/taskqueue"
+	"github.com/rakhisyudha/lab/internal/assessment"
 	"github.com/rakhisyudha/lab/internal/auth"
 	"github.com/rakhisyudha/lab/internal/content"
 	"github.com/rakhisyudha/lab/internal/evaluation"
@@ -35,6 +37,7 @@ import (
 	"github.com/rakhisyudha/lab/internal/platform/ratelimit"
 	"github.com/rakhisyudha/lab/internal/platform/settings"
 	"github.com/rakhisyudha/lab/internal/progress"
+	"github.com/rakhisyudha/lab/internal/recommendation"
 )
 
 func main() {
@@ -99,8 +102,17 @@ func run() error {
 	api.Use(generalLimiter)
 	authHandler.RegisterRoutes(api, middleware, authLimiter)
 	contentHandler.RegisterRoutes(api, api.Group("/admin", middleware.Authenticate(), auth.RequireRole("admin")))
-	progressHandler.RegisterRoutes(api.Group("/me", middleware.Authenticate()))
+	meGroup := api.Group("/me", middleware.Authenticate())
+	progressHandler.RegisterRoutes(meGroup)
 	adminGroup := api.Group("/admin", middleware.Authenticate(), auth.RequireRole("admin"))
+
+	masterySvc := progress.NewMasteryService(pool, settingsSvc)
+	assessmentStore := assessment.NewStore(pool)
+	assessmentSvc := assessment.NewService(assessmentStore, postgresQueue,
+		quota.NewManager(pool, settingsSvc, c), settingsSvc, c)
+	assessment.NewHandler(assessmentSvc, assessmentStore).RegisterRoutes(api, middleware.Authenticate())
+	progressHandler.RegisterAdminRoutes(adminGroup, masterySvc)
+	recommendation.NewHandler(pool, settingsSvc).RegisterRoutes(meGroup)
 	taskHandler.RegisterRoutes(api, adminGroup, middleware.Authenticate())
 
 	goldenStore := golden.NewStore(pool)
