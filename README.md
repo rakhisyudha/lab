@@ -44,6 +44,33 @@ The password for `bootstrap-admin` is read from `BOOTSTRAP_ADMIN_PASSWORD`.
 
 See `.env.example` for every supported variable. No credentials are hardcoded in the code.
 
+## Docker Compose (all services at once)
+
+Bring up PostgreSQL, run the migrations/seeds, then start the API and worker with one command:
+
+```bash
+cp .env.example .env    # skip if you already have one; set JWT_SIGNING_KEY etc.
+docker compose up -d --build
+```
+
+- API: `http://localhost:18080/api/v1/health` (override with `API_PORT` in `.env`)
+- Postgres on the host: `localhost:5434` (use `docker compose exec db psql -U postgres -d backendlab`)
+- `migrate` is a one-shot service: `up` → `seed-prompts` → optional `bootstrap-admin`
+- To create the first admin, set `BOOTSTRAP_ADMIN_EMAIL` in `.env` (password comes from `BOOTSTRAP_ADMIN_PASSWORD`) and rerun `docker compose up -d --build`.
+
+Useful commands:
+
+```bash
+docker compose logs -f api worker
+docker compose ps
+docker compose down          # stop, keep the database volume
+docker compose down -v       # stop and delete all data
+```
+
+The API port, DB port, and DB credentials can be overridden with `API_PORT`, `DB_PORT`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB`. `DATABASE_URL` from `.env` is ignored inside containers so services reach the database via the Compose network.
+
+There is no frontend in this repo yet. `compose.yaml` has a commented `web` service stub showing where to add one (build context `./web`, API healthcheck dependency, and `http://localhost:5173` in `CORS_ALLOWED_ORIGINS`).
+
 ## Main Endpoints
 
 | Area | Example |

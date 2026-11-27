@@ -1,0 +1,15 @@
+.git
+.github
+.kiro
+.env
+.env.*
+*.exe
+bin/
+dist/
+coverage/
+node_modules/
+docs/
+examples/
+scripts/
+test/
+*.md
